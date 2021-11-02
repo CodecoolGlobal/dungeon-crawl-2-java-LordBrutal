@@ -76,11 +76,13 @@ public class Main extends Application {
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
         int  x, y;
         int[] shift = new int[2];
-        if(map.getPlayer().getX() > 12){
-            shift[0] = map.getPlayer().getX() - 12;
+        int centerX = (int)(canvas.getWidth()/64);
+        int centerY = (int)(canvas.getHeight()/64) - 1;
+        if(map.getPlayer().getX() > centerX){
+            shift[0] = map.getPlayer().getX() - centerX;
         }
-        if(map.getPlayer().getY() > 9 ) {
-            shift[1] = map.getPlayer().getY() - 9;
+        if(map.getPlayer().getY() > centerY) {
+            shift[1] = map.getPlayer().getY() - centerY;
         }
         for (x = 0; x+shift[0] < map.getWidth(); x++) {
             for (y = 0; y+shift[1] < map.getHeight(); y++) {
