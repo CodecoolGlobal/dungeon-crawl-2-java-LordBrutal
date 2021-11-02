@@ -15,6 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+
 public class Main extends Application {
     GameMap map = MapLoader.loadMap();
     Canvas canvas = new Canvas(
@@ -53,19 +54,23 @@ public class Main extends Application {
     private void onKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
             case UP:
+                makeEnemyMove();
                 map.getPlayer().move(0, -1);
                 refresh();
                 break;
             case DOWN:
+                makeEnemyMove();
                 map.getPlayer().move(0, 1);
                 refresh();
                 break;
             case LEFT:
+                makeEnemyMove();
                 map.getPlayer().move(-1, 0);
                 refresh();
                 break;
             case RIGHT:
-                map.getPlayer().move(1,0);
+                makeEnemyMove();
+                map.getPlayer().move(1, 0);
                 refresh();
                 break;
         }
@@ -85,5 +90,10 @@ public class Main extends Application {
             }
         }
         healthLabel.setText("" + map.getPlayer().getHealth());
+    }
+
+    private void makeEnemyMove(){
+        int[] nextStepSpider = map.getSpider().nextStep();
+        map.getSpider().move(nextStepSpider[0],nextStepSpider[1]);
     }
 }

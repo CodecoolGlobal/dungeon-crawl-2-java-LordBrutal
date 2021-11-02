@@ -42,12 +42,12 @@ public class MapLoader {
                             map.setPlayer(new Player(cell));
                             break;
                         case 'c':
-                            cell.setType(CellType.CYCLOPS);
+                            cell.setType(CellType.FLOOR);
                             new Cyclops(cell);
                             break;
                         case 'w':
-                            cell.setType(CellType.SPIDER);
-                            new Spider(cell);
+                            cell.setType(CellType.FLOOR);
+                            map.setSpider(new Spider(cell));
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
