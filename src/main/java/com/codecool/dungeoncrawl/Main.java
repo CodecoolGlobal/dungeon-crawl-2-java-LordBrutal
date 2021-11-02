@@ -1,6 +1,7 @@
 package com.codecool.dungeoncrawl;
 
 import com.codecool.dungeoncrawl.logic.Cell;
+import com.codecool.dungeoncrawl.logic.CellType;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.MapLoader;
 import javafx.application.Application;
@@ -78,12 +79,15 @@ public class Main extends Application {
             for (int y = 0; y < map.getHeight(); y++) {
                 Cell cell = map.getCell(x, y);
                 if (cell.getActor() != null) {
-                    Tiles.drawTile(context, cell.getActor(), x, y);
-                }
-                else if (cell.getItem() != null) {
-                    Tiles.drawTile(context, cell.getItem(), x, y);
-                }
-                else {
+
+                    if(cell.getActor().getHealth() <= 0) {
+                        cell.setActor(null);
+                        Tiles.drawTile(context, cell, x, y);
+                    } else {
+                        Tiles.drawTile(context, cell.getActor(), x, y);
+                    }
+                } else {
+
                     Tiles.drawTile(context, cell, x, y);
                 }
             }
