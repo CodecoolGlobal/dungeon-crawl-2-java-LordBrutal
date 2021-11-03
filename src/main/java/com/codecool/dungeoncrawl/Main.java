@@ -21,8 +21,8 @@ import javafx.stage.Stage;
 public class Main extends Application {
     GameMap map = MapLoader.loadMap();
     Canvas canvas = new Canvas(
-            Math.min(map.getWidth(), 25) * Tiles.TILE_WIDTH,
-            Math.min(map.getHeight(), 20) * Tiles.TILE_WIDTH);
+            Math.min(map.getWidth(), 35) * Tiles.TILE_WIDTH,
+            Math.min(map.getHeight(), 22) * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
 
