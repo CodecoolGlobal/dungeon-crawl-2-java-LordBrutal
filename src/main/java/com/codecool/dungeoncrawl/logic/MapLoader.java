@@ -1,10 +1,12 @@
 package com.codecool.dungeoncrawl.logic;
 
+import com.codecool.dungeoncrawl.logic.actors.enemys.Cyclops;
 import com.codecool.dungeoncrawl.logic.actors.Player;
-import com.codecool.dungeoncrawl.logic.actors.Skeleton;
+import com.codecool.dungeoncrawl.logic.actors.enemys.Skeleton;
 import com.codecool.dungeoncrawl.logic.items.Key;
 import com.codecool.dungeoncrawl.logic.items.Shield;
 import com.codecool.dungeoncrawl.logic.items.Sword;
+import com.codecool.dungeoncrawl.logic.actors.enemys.Spider;
 
 import java.io.InputStream;
 import java.util.Scanner;
@@ -36,7 +38,7 @@ public class MapLoader {
                             break;
                         case 's':
                             cell.setType(CellType.FLOOR);
-                            new Skeleton(cell);
+                            map.setEnemys(new Skeleton(cell));
                             break;
                         case '@':
                             cell.setType(CellType.FLOOR);
@@ -53,6 +55,14 @@ public class MapLoader {
                         case 'B':
                             cell.setType(CellType.FLOOR);
                             new Key(cell, Color.BLUE.getColor());
+                            break;
+                        case 'c':
+                            cell.setType(CellType.FLOOR);
+                            map.setEnemys(new Cyclops(cell));
+                            break;
+                        case 'w':
+                            cell.setType(CellType.FLOOR);
+                            map.setEnemys(new Spider(cell));
                             break;
                         case 'x':
                             cell.setType(CellType.BREAKABLEWALL);

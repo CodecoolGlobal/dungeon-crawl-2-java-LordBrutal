@@ -1,9 +1,10 @@
 package com.codecool.dungeoncrawl;
 
 import com.codecool.dungeoncrawl.logic.Cell;
-import com.codecool.dungeoncrawl.logic.CellType;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.MapLoader;
+import com.codecool.dungeoncrawl.logic.actors.enemys.Cyclops;
+import com.codecool.dungeoncrawl.logic.actors.enemys.Spider;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -15,6 +16,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
 
 public class Main extends Application {
     GameMap map = MapLoader.loadMap();
@@ -55,18 +57,22 @@ public class Main extends Application {
         switch (keyEvent.getCode()) {
             case UP:
                 map.getPlayer().move(0, -1);
+                makeEnemyMove();
                 refresh();
                 break;
             case DOWN:
                 map.getPlayer().move(0, 1);
+                makeEnemyMove();
                 refresh();
                 break;
             case LEFT:
                 map.getPlayer().move(-1, 0);
+                makeEnemyMove();
                 refresh();
                 break;
             case RIGHT:
-                map.getPlayer().move(1,0);
+                map.getPlayer().move(1, 0);
+                makeEnemyMove();
                 refresh();
                 break;
         }
@@ -105,6 +111,18 @@ public class Main extends Application {
                 }
             }
         }
-        healthLabel.setText("" + map.getPlayer().getHealth());
+        healthLabel.setText("❤".repeat(map.getPlayer().getHealth()));
+    }
+
+    private void makeEnemyMove(){
+        for (int i = 0; i < map.getEnemys().size(); i++) {
+            if (map.getEnemys().get(i) instanceof Spider){
+                int[] nextStepSpider = ((Spider) map.getEnemys().get(i)).nextStep();
+                map.getEnemys().get(i).move(nextStepSpider[0],nextStepSpider[1]);
+            }else if(map.getEnemys().get(i) instanceof Cyclops){
+                int[] calculateNextStep = ((Cyclops) map.getEnemys().get(i)).nextStepCyclop();
+                map.getEnemys().get(i).move(calculateNextStep[0], calculateNextStep[1]);
+            }
+        }
     }
 }
