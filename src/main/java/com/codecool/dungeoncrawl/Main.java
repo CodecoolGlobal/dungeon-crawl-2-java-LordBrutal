@@ -19,8 +19,8 @@ import javafx.stage.Stage;
 public class Main extends Application {
     GameMap map = MapLoader.loadMap();
     Canvas canvas = new Canvas(
-            map.getWidth() * Tiles.TILE_WIDTH,
-            map.getHeight() * Tiles.TILE_WIDTH);
+            Math.min(map.getWidth(), 25) * Tiles.TILE_WIDTH,
+            Math.min(map.getHeight(), 20) * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
 
@@ -75,9 +75,18 @@ public class Main extends Application {
     private void refresh() {
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        for (int x = 0; x < map.getWidth(); x++) {
-            for (int y = 0; y < map.getHeight(); y++) {
-                Cell cell = map.getCell(x, y);
+        int centerX = (int)(canvas.getWidth()/64);
+        int centerY = (int)(canvas.getHeight()/64) - 1;
+        int[] shift = new int[2];
+        if(map.getPlayer().getX() > centerX){
+            shift[0] = map.getPlayer().getX() - centerX;
+        }
+        if(map.getPlayer().getY() > centerY) {
+            shift[1] = map.getPlayer().getY() - centerY;
+        }
+        for (int x = 0; x+shift[0] < map.getWidth(); x++) {
+            for (int y = 0; y+shift[1] < map.getHeight(); y++) {
+                Cell cell = map.getCell(x+shift[0], y+shift[1]);
                 if (cell.getActor() != null) {
 
                     if(cell.getActor().getHealth() <= 0) {
