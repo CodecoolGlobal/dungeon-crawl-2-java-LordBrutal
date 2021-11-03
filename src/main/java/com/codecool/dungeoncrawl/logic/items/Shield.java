@@ -4,7 +4,7 @@ import com.codecool.dungeoncrawl.logic.Cell;
 
 public class Shield extends Item{
 
-    protected int defenseModifier = 10;
+    private final int defenseModifier = 10;
 
     public Shield(Cell cell) {
         super(cell);

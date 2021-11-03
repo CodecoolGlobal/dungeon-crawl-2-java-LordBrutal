@@ -4,7 +4,7 @@ import com.codecool.dungeoncrawl.logic.Cell;
 
 public class Potion extends Item{
 
-    protected int healthIncrease = 25;
+    private int healthIncrease = 25;
 
     public Potion(Cell cell) {
         super(cell);
