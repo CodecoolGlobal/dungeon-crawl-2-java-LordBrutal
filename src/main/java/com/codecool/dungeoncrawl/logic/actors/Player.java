@@ -1,17 +1,14 @@
 package com.codecool.dungeoncrawl.logic.actors;
 
 import com.codecool.dungeoncrawl.logic.Cell;
-import com.codecool.dungeoncrawl.logic.items.Item;
-import com.codecool.dungeoncrawl.logic.items.Potion;
-import com.codecool.dungeoncrawl.logic.items.Shield;
-import com.codecool.dungeoncrawl.logic.items.Sword;
-
-import java.util.ArrayList;
+import com.codecool.dungeoncrawl.logic.items.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Player extends Actor {
     private String name;
 
-    private ArrayList<Item> inventory = new ArrayList<>();
+    private final ObservableList<String> inventory = FXCollections.observableArrayList();
     private int defense = 0;
     private boolean hasPickAxe = false;
 
@@ -53,13 +50,15 @@ public class Player extends Actor {
                     hasPickAxe = true;
                     break;
             }
-            inventory.add(item);
-            System.out.println(inventory);
+            if (item instanceof Key) {
+                inventory.add(String.format("%s%s key", ((Key) item).getColor().substring(0, 1).toUpperCase(), ((Key) item).getColor().substring(1)));
+            }
+            else inventory.add(item.getClass().getSimpleName());
             this.getCell().setItem(null);
         }
     }
 
-    public ArrayList<Item> getInventory() {
+    public ObservableList<String> getInventory() {
         return inventory;
     }
 
