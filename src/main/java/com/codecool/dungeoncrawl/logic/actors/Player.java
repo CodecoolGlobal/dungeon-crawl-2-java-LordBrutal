@@ -40,6 +40,7 @@ public class Player extends Actor {
             switch (itemClass) {
                 case "Sword":
                     this.attack += ((Sword)item).getAttackModifier();
+                    setTileName("player with sword");
                     break;
                 case "Shield":
                     defense += ((Shield) item).getDefenseModifier();
