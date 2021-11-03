@@ -6,7 +6,8 @@ public enum CellType {
     WALL("wall"),
     BREAKABLEWALL("breakable wall"),
     WATER("water"),
-    GRASS("grass");
+    GRASS("grass"),
+    DOOR("door");
 
     private final String tileName;
 
