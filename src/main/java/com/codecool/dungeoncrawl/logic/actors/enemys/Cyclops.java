@@ -1,11 +1,10 @@
-package com.codecool.dungeoncrawl.logic.actors;
+package com.codecool.dungeoncrawl.logic.actors.enemys;
 
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.utils.Util;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Cyclops extends Enemy{
     public Cyclops(Cell cell) {

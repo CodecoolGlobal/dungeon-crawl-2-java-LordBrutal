@@ -1,9 +1,9 @@
 package com.codecool.dungeoncrawl.logic;
 
-import com.codecool.dungeoncrawl.logic.actors.Actor;
-import com.codecool.dungeoncrawl.logic.actors.Cyclops;
+import com.codecool.dungeoncrawl.logic.actors.enemys.Cyclops;
 import com.codecool.dungeoncrawl.logic.actors.Player;
-import com.codecool.dungeoncrawl.logic.actors.Spider;
+import com.codecool.dungeoncrawl.logic.actors.enemys.Enemy;
+import com.codecool.dungeoncrawl.logic.actors.enemys.Spider;
 
 import java.util.ArrayList;
 
@@ -13,8 +13,7 @@ public class GameMap {
     private Cell[][] cells;
 
     private Player player;
-    private Spider spider;
-    private Cyclops cyclops;
+    private ArrayList<Enemy> enemys = new ArrayList<>();
 
     public GameMap(int width, int height, CellType defaultCellType) {
         this.width = width;
@@ -47,19 +46,21 @@ public class GameMap {
         return height;
     }
 
-    public void setSpider(Spider spider){
-        this.spider = spider;
+
+
+    public Enemy getCyclops(){
+        for (int i = 0; i < enemys.size(); i++) {
+            if (enemys.get(i) instanceof Cyclops){
+                return enemys.get(i);
+            }
+        }
+        return null;
     }
 
-    public Spider getSpider() {
-        return spider;
+    public ArrayList<Enemy> getEnemys(){
+        return enemys;
     }
-
-    public void setCyclops(Cyclops cyclops){
-        this.cyclops = cyclops;
-    }
-
-    public Cyclops getCyclops(){
-        return this.cyclops;
+    public void setEnemys(Enemy enemy){
+        enemys.add(enemy);
     }
 }

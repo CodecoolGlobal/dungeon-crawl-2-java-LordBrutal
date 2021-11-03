@@ -1,10 +1,10 @@
 package com.codecool.dungeoncrawl;
 
 import com.codecool.dungeoncrawl.logic.Cell;
-import com.codecool.dungeoncrawl.logic.CellType;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.MapLoader;
-import com.codecool.dungeoncrawl.logic.actors.Spider;
+import com.codecool.dungeoncrawl.logic.actors.enemys.Cyclops;
+import com.codecool.dungeoncrawl.logic.actors.enemys.Spider;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -115,9 +115,14 @@ public class Main extends Application {
     }
 
     private void makeEnemyMove(){
-        int[] nextStepSpider = map.getSpider().nextStep();
-        map.getSpider().move(nextStepSpider[0],nextStepSpider[1]);
-        int[] calculateNextStep = map.getCyclops().nextStepCyclop();
-        map.getCyclops().move(calculateNextStep[0], calculateNextStep[1]);
+        for (int i = 0; i < map.getEnemys().size(); i++) {
+            if (map.getEnemys().get(i) instanceof Spider){
+                int[] nextStepSpider = ((Spider) map.getEnemys().get(i)).nextStep();
+                map.getEnemys().get(i).move(nextStepSpider[0],nextStepSpider[1]);
+            }else if(map.getEnemys().get(i) instanceof Cyclops){
+                int[] calculateNextStep = ((Cyclops) map.getEnemys().get(i)).nextStepCyclop();
+                map.getEnemys().get(i).move(calculateNextStep[0], calculateNextStep[1]);
+            }
+        }
     }
 }
