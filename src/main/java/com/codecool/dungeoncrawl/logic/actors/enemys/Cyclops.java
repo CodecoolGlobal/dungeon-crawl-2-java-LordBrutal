@@ -44,7 +44,7 @@ public class Cyclops extends Enemy{
     private int[] dodgewall(){
         int[] basicposi = generatePosition();
         Cell newcell = super.getCell();
-        System.out.println(newcell.getNeighbor(basicposi[0],basicposi[1]).getTileName());
+        //System.out.println(newcell.getNeighbor(basicposi[0],basicposi[1]).getTileName());
         if(newcell.getNeighbor(basicposi[0],basicposi[1]).getTileName() == "wall"){
             ArrayList<int[]> movements = new ArrayList<>();
             movements.add(new int[]{0,-1});
