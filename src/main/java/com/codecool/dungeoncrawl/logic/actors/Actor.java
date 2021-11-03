@@ -21,7 +21,7 @@ public abstract class Actor implements Drawable {
         if (this.health <= 0) {
             return;
         }
-        if(!nextCell.getType().equals(CellType.WALL) && nextCell.getActor() == null){
+        if(nextCell.getType().equals(CellType.FLOOR) && nextCell.getActor() == null){
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
@@ -29,8 +29,9 @@ public abstract class Actor implements Drawable {
         else if (Objects.equals(getTileName(), "player") && nextCell.getActor() != null) {
 
             attack(nextCell.getActor());
+        } else if (nextCell.getType().equals(CellType.BREAKABLEWALL)) { //  && player has pickaxe
+            nextCell.setType(CellType.FLOOR);
         }
-
     }
     public void attack(Actor skeleton) {
         if (skeleton.getHealth() > 0) {
