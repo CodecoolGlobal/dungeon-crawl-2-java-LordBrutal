@@ -23,6 +23,8 @@ public class Tiles {
     }
 
     static {
+        tileMap.put("bush", new Tile(0,2));
+        tileMap.put("tree", new Tile(3,2));
         tileMap.put("spider", new Tile(30,5));
         tileMap.put("cyclops", new Tile(30,6));
         tileMap.put("empty", new Tile(0, 0));

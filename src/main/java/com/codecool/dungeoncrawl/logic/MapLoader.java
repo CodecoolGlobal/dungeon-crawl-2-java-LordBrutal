@@ -75,6 +75,12 @@ public class MapLoader {
                         case 'g':
                             cell.setType(CellType.GRASS);
                             break;
+                        case 'T':
+                            cell.setType(CellType.TREE);
+                            break;
+                        case 'h':
+                            cell.setType(CellType.BUSH);
+                            break;
                         case 'D':
                             cell.setType(CellType.DOOR);
                             break;
