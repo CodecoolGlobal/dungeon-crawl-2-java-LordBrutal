@@ -66,4 +66,8 @@ public class Player extends Actor {
     public boolean getHasPickAxe() {
         return hasPickAxe;
     }
+
+    public int getDefense() {
+        return defense;
+    }
 }
