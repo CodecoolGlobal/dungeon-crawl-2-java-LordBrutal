@@ -6,16 +6,14 @@ import com.codecool.dungeoncrawl.logic.MapLoader;
 import com.codecool.dungeoncrawl.logic.actors.enemys.Cyclops;
 import com.codecool.dungeoncrawl.logic.actors.enemys.Spider;
 import javafx.application.Application;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -31,6 +29,8 @@ public class Main extends Application {
     Label healthLabel = new Label();
     Button pickUpButton = new Button("Pick up!");
     Label attackLabel = new Label();
+    Label defenseLabel = new Label();
+    ListView<String> list = new ListView<>();
 
     public static void main(String[] args) {
         launch(args);
@@ -38,17 +38,23 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        list.setFocusTraversable(false);
+        list.setItems(map.getPlayer().getInventory());
+        pickUpButton.setFocusTraversable(false);
+        pickUpButton.setOnMouseClicked(mouseEvent -> pickUpItem());
         GridPane ui = new GridPane();
-        ui.setPrefWidth(200);
+        ui.setPrefWidth(400);
         ui.setPadding(new Insets(10));
 
         ui.add(new Label("Health: "), 0, 0);
         ui.add(healthLabel, 1, 0);
         ui.add(new Label("Attack: "), 0, 1);
         ui.add(attackLabel, 1, 1);
-        pickUpButton.setFocusTraversable(false);
-        pickUpButton.setOnMouseClicked(mouseEvent -> pickUpItem());
-        ui.add(pickUpButton, 0, 2);
+        ui.add(new Label("Defense: "), 0, 2);
+        ui.add(defenseLabel, 1,2);
+        ui.add(pickUpButton, 0, 5);
+        ui.add(new Label("Inventory"), 0, 3);
+        ui.add(list, 0, 4);
 
         BorderPane borderPane = new BorderPane();
 
@@ -129,6 +135,7 @@ public class Main extends Application {
         }
         attackLabel.setText("" + map.getPlayer().getAttack());
         healthLabel.setText("❤".repeat(map.getPlayer().getHealth()));
+        defenseLabel.setText("" + map.getPlayer().getDefense());
     }
 
     private void makeEnemyMove(){

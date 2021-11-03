@@ -3,8 +3,8 @@ package com.codecool.dungeoncrawl.logic.actors;
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.CellType;
 import com.codecool.dungeoncrawl.logic.Drawable;
+import com.codecool.dungeoncrawl.logic.actors.enemys.Cyclops;
 
-import java.util.Objects;
 
 public abstract class Actor implements Drawable {
     private Cell cell;
@@ -19,6 +19,7 @@ public abstract class Actor implements Drawable {
 
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
+        Actor actor = cell.getActor();
         if (this.health <= 0) {
             return;
         }
@@ -27,10 +28,12 @@ public abstract class Actor implements Drawable {
             nextCell.setActor(this);
             cell = nextCell;
         }
-        else if (this.cell.getActor() instanceof Player && nextCell.getActor() != null) {
+        else if (actor instanceof Player && nextCell.getActor() != null) {
             attack(nextCell.getActor());
-        } else if (nextCell.getType().equals(CellType.BREAKABLEWALL)) { //  && player has pickaxe
-            nextCell.setType(CellType.FLOOR);
+        }else if (nextCell.getType().equals(CellType.BREAKABLEWALL)) {
+            if ((actor instanceof Player && cell.getMap().getPlayer().getHasPickAxe()) || actor instanceof Cyclops) {
+                nextCell.setType(CellType.FLOOR);
+            }
         }
     }
     public void attack(Actor skeleton) {
