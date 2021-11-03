@@ -6,12 +6,16 @@ import com.codecool.dungeoncrawl.logic.MapLoader;
 import com.codecool.dungeoncrawl.logic.actors.enemys.Cyclops;
 import com.codecool.dungeoncrawl.logic.actors.enemys.Spider;
 import javafx.application.Application;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -25,6 +29,8 @@ public class Main extends Application {
             Math.min(map.getHeight(), 22) * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
+    Button pickUpButton = new Button("Pick up!");
+    Label attackLabel = new Label();
 
     public static void main(String[] args) {
         launch(args);
@@ -38,6 +44,11 @@ public class Main extends Application {
 
         ui.add(new Label("Health: "), 0, 0);
         ui.add(healthLabel, 1, 0);
+        ui.add(new Label("Attack: "), 0, 1);
+        ui.add(attackLabel, 1, 1);
+        pickUpButton.setFocusTraversable(false);
+        pickUpButton.setOnMouseClicked(mouseEvent -> pickUpItem());
+        ui.add(pickUpButton, 0, 2);
 
         BorderPane borderPane = new BorderPane();
 
@@ -51,6 +62,11 @@ public class Main extends Application {
 
         primaryStage.setTitle("Dungeon Crawl");
         primaryStage.show();
+    }
+
+    private void pickUpItem() {
+        map.getPlayer().addToInventory();
+        refresh();
     }
 
     private void onKeyPressed(KeyEvent keyEvent) {
@@ -111,6 +127,7 @@ public class Main extends Application {
                 }
             }
         }
+        attackLabel.setText("" + map.getPlayer().getAttack());
         healthLabel.setText("❤".repeat(map.getPlayer().getHealth()));
     }
 
