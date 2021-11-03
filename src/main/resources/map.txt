@@ -1,14 +1,14 @@
 60 30
-                ########
-                #......#################
-                #.s.S..xxxxxxxxxxxxxxxx#
-                #......###############x#
-                #.######gggggg~~ggggg#x#
-#################.#ggggg~~~~~~~gggggg#x#
-#...Bxxxxxxxxxxxx.#gg~~~~~~~ggggggggg#x#
-#.s..############.#g~~~~~gggggggggggg#x#
-#....#ggggg~~ggg#.#ggg~ggggggggggg~gg#x#
-#....#ggggg~~~gg#.##gggggggg#####g~~g#x#
+gggggg~ggggggggg########ggggggggggggggggggg
+ggggg~~~gggggggg#......#################ggg
+gggg~~~~~ggggggg#.s.S..xxxxxxxxxxxxxxxx#gg~
+ggggg~~~gggggggg#......###############x#g~~
+gggggg~ggggggggg#.######gggggg~~ggggg#x#gg~
+#################.#ggggg~~~~~~~gggggg#x#ggg
+#...Bxxxxxxxxxxxx.#gg~~~~~~~ggggggggg#x#ggg
+#.s..############.#g~~~~~gggggggggggg#x#ggg
+#....#ggggg~~ggg#.#ggg~ggggggggggg~gg#x#ggg
+#....#ggggg~~~gg#.##gggggggg#####g~~g#x#ggg
 #.##############...##########...######x####
 #.#..............@.........................#
 #.#.############...##########...#######x###
