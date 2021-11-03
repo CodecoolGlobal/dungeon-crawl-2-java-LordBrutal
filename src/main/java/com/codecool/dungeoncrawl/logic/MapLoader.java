@@ -52,7 +52,7 @@ public class MapLoader {
                             break;
                         case 'B':
                             cell.setType(CellType.FLOOR);
-                            new Key(cell, "blue");
+                            new Key(cell, Color.BLUE.getColor());
                             break;
                         case 'x':
                             cell.setType(CellType.BREAKABLEWALL);
