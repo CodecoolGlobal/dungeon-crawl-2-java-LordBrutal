@@ -4,7 +4,7 @@ import com.codecool.dungeoncrawl.logic.Cell;
 
 public class Key extends Item{
 
-    protected String color;
+    private final String color;
 
     public Key(Cell cell, String color) {
         super(cell);
