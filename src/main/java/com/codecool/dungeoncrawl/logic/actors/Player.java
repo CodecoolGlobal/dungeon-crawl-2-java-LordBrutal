@@ -13,6 +13,7 @@ public class Player extends Actor {
 
     private ArrayList<Item> inventory = new ArrayList<>();
     private int defense = 0;
+    private boolean hasPickAxe = false;
 
     public Player(Cell cell) {
         super(cell);
@@ -48,6 +49,9 @@ public class Player extends Actor {
                 case "Potion":
                     setHealth(this.getHealth()+((Potion) item).getHealthIncrease());
                     break;
+                case "PickAxe":
+                    hasPickAxe = true;
+                    break;
             }
             inventory.add(item);
             System.out.println(inventory);
@@ -57,5 +61,9 @@ public class Player extends Actor {
 
     public ArrayList<Item> getInventory() {
         return inventory;
+    }
+
+    public boolean getHasPickAxe() {
+        return hasPickAxe;
     }
 }
