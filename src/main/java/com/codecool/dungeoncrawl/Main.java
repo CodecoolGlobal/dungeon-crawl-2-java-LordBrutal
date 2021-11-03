@@ -74,18 +74,17 @@ public class Main extends Application {
     private void refresh() {
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        int  x, y;
-        int[] shift = new int[2];
         int centerX = (int)(canvas.getWidth()/64);
         int centerY = (int)(canvas.getHeight()/64) - 1;
+        int[] shift = new int[2];
         if(map.getPlayer().getX() > centerX){
             shift[0] = map.getPlayer().getX() - centerX;
         }
         if(map.getPlayer().getY() > centerY) {
             shift[1] = map.getPlayer().getY() - centerY;
         }
-        for (x = 0; x+shift[0] < map.getWidth(); x++) {
-            for (y = 0; y+shift[1] < map.getHeight(); y++) {
+        for (int x = 0; x+shift[0] < map.getWidth(); x++) {
+            for (int y = 0; y+shift[1] < map.getHeight(); y++) {
                 Cell cell = map.getCell(x+shift[0], y+shift[1]);
                 if (cell.getActor() != null) {
                     Tiles.drawTile(context, cell.getActor(), x, y);
