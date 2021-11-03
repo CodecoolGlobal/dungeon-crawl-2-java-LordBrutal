@@ -3,6 +3,7 @@ package com.codecool.dungeoncrawl.logic.actors.enemys;
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.utils.Util;
+import static java.util.Arrays.asList;
 
 import java.util.ArrayList;
 
@@ -44,19 +45,9 @@ public class Cyclops extends Enemy{
     private int[] dodgewall(){
         int[] basicposi = generatePosition();
         Cell newcell = super.getCell();
-        //System.out.println(newcell.getNeighbor(basicposi[0],basicposi[1]).getTileName());
         if(newcell.getNeighbor(basicposi[0],basicposi[1]).getTileName() == "wall"){
-            ArrayList<int[]> movements = new ArrayList<>();
-            movements.add(new int[]{0,-1});
-            movements.add(new int[]{-1,0});
-            movements.add(new int[]{0,1});
-            movements.add(new int[]{1,0});
-            for (int i = 0; i < movements.size(); i++) {
-                if (movements.get(i)[0] == basicposi[0] && movements.get(i)[1] == basicposi[1]){
-                    movements.remove(i);
-                }
-            }
-            return movements.get(Util.generateRandomBetween(0,2));
+            ArrayList<int[]> finalsteps = this.removWalls();
+            return finalsteps.get(Util.generateRandomBetween(0,finalsteps.size()-1));
         }
         return basicposi;
     }
