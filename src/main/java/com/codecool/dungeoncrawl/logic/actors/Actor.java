@@ -36,11 +36,11 @@ public abstract class Actor implements Drawable {
             }
         }
     }
-    public void attack(Actor skeleton) {
-        if (skeleton.getHealth() > 0) {
-            skeleton.setHealth(skeleton.getHealth() - this.attack);
-            if (skeleton.getHealth() > 0) {
-                this.health -= skeleton.attack;
+    public void attack(Actor enemy) {
+        if (enemy.getHealth() > 0) {
+            enemy.setHealth(enemy.getHealth() - this.attack);
+            if (enemy.getHealth() > 0) {
+                this.health -= enemy.attack;
             }
         }
     }
