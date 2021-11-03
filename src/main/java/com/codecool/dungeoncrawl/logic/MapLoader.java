@@ -57,6 +57,12 @@ public class MapLoader {
                         case 'x':
                             cell.setType(CellType.BREAKABLEWALL);
                             break;
+                        case '~':
+                            cell.setType(CellType.WATER);
+                            break;
+                        case 'g':
+                            cell.setType(CellType.GRASS);
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }
