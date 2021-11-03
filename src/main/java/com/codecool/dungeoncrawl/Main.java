@@ -31,6 +31,7 @@ public class Main extends Application {
     Label healthLabel = new Label();
     Button pickUpButton = new Button("Pick up!");
     Label attackLabel = new Label();
+    Label defenseLabel = new Label();
 
     public static void main(String[] args) {
         launch(args);
@@ -46,9 +47,11 @@ public class Main extends Application {
         ui.add(healthLabel, 1, 0);
         ui.add(new Label("Attack: "), 0, 1);
         ui.add(attackLabel, 1, 1);
+        ui.add(new Label("Defense: "), 0, 2);
+        ui.add(defenseLabel, 1,2);
         pickUpButton.setFocusTraversable(false);
         pickUpButton.setOnMouseClicked(mouseEvent -> pickUpItem());
-        ui.add(pickUpButton, 0, 2);
+        ui.add(pickUpButton, 0, 3);
 
         BorderPane borderPane = new BorderPane();
 
@@ -129,6 +132,7 @@ public class Main extends Application {
         }
         attackLabel.setText("" + map.getPlayer().getAttack());
         healthLabel.setText("❤".repeat(map.getPlayer().getHealth()));
+        defenseLabel.setText("" + map.getPlayer().getDefense());
     }
 
     private void makeEnemyMove(){
