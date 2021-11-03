@@ -1,11 +1,11 @@
 package com.codecool.dungeoncrawl.logic.actors;
 
 import com.codecool.dungeoncrawl.logic.Cell;
+import com.codecool.dungeoncrawl.utils.Util;
 
 import java.util.ArrayList;
 
 public class Spider extends Actor{
-    int index = 0;
     private ArrayList<int[]> movements = new ArrayList<>();
 
     public Spider(Cell cell) {
@@ -18,12 +18,7 @@ public class Spider extends Actor{
     }
 
     public int[] nextStep(){
-        int[] nextStep = movements.get(index);
-        index ++;
-        if (index == movements.size()){
-            index = 0;
-        }
-        return nextStep;
+        return movements.get(Util.generateRandomBetween(0,3));
     }
 
 
