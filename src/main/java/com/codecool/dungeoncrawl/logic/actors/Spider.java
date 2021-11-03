@@ -14,7 +14,6 @@ public class Spider extends Actor{
         movements.add(new int[]{-1,0});
         movements.add(new int[]{0,1});
         movements.add(new int[]{1,0});
-
     }
 
     public int[] nextStep(){
