@@ -23,14 +23,20 @@ public class Tiles {
     }
 
     static {
+        tileMap.put("spider", new Tile(30,5));
+        tileMap.put("cyclops", new Tile(30,6));
         tileMap.put("empty", new Tile(0, 0));
         tileMap.put("wall", new Tile(10, 17));
         tileMap.put("floor", new Tile(2, 0));
-        tileMap.put("player", new Tile(27, 0));
+        tileMap.put("player", new Tile(25, 0));
+        tileMap.put("player with sword", new Tile(27, 0));
         tileMap.put("skeleton", new Tile(29, 6));
         tileMap.put("sword", new Tile(0, 29));
         tileMap.put("shield", new Tile(7, 26));
         tileMap.put("blue key", new Tile(17, 23));
+        tileMap.put("breakable wall", new Tile(0, 13));
+        tileMap.put("water", new Tile(8, 5));
+        tileMap.put("grass", new Tile(6, 0));
         tileMap.put("potion", new Tile(17, 25));
     }
 

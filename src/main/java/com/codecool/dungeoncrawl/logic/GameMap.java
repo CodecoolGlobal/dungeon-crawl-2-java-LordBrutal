@@ -1,6 +1,11 @@
 package com.codecool.dungeoncrawl.logic;
 
+import com.codecool.dungeoncrawl.logic.actors.enemys.Cyclops;
 import com.codecool.dungeoncrawl.logic.actors.Player;
+import com.codecool.dungeoncrawl.logic.actors.enemys.Enemy;
+import com.codecool.dungeoncrawl.logic.actors.enemys.Spider;
+
+import java.util.ArrayList;
 
 public class GameMap {
     private int width;
@@ -8,6 +13,7 @@ public class GameMap {
     private Cell[][] cells;
 
     private Player player;
+    private ArrayList<Enemy> enemys = new ArrayList<>();
 
     public GameMap(int width, int height, CellType defaultCellType) {
         this.width = width;
@@ -38,5 +44,23 @@ public class GameMap {
 
     public int getHeight() {
         return height;
+    }
+
+
+
+    public Enemy getCyclops(){
+        for (int i = 0; i < enemys.size(); i++) {
+            if (enemys.get(i) instanceof Cyclops){
+                return enemys.get(i);
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Enemy> getEnemys(){
+        return enemys;
+    }
+    public void setEnemys(Enemy enemy){
+        enemys.add(enemy);
     }
 }

@@ -1,9 +1,10 @@
 package com.codecool.dungeoncrawl;
 
 import com.codecool.dungeoncrawl.logic.Cell;
-import com.codecool.dungeoncrawl.logic.CellType;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.MapLoader;
+import com.codecool.dungeoncrawl.logic.actors.enemys.Cyclops;
+import com.codecool.dungeoncrawl.logic.actors.enemys.Spider;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
@@ -20,11 +21,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+
 public class Main extends Application {
     GameMap map = MapLoader.loadMap();
     Canvas canvas = new Canvas(
-            Math.min(map.getWidth(), 25) * Tiles.TILE_WIDTH,
-            Math.min(map.getHeight(), 20) * Tiles.TILE_WIDTH);
+            Math.min(map.getWidth(), 35) * Tiles.TILE_WIDTH,
+            Math.min(map.getHeight(), 22) * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
     Button pickUpButton = new Button("Pick up!");
@@ -71,18 +73,22 @@ public class Main extends Application {
         switch (keyEvent.getCode()) {
             case UP:
                 map.getPlayer().move(0, -1);
+                makeEnemyMove();
                 refresh();
                 break;
             case DOWN:
                 map.getPlayer().move(0, 1);
+                makeEnemyMove();
                 refresh();
                 break;
             case LEFT:
                 map.getPlayer().move(-1, 0);
+                makeEnemyMove();
                 refresh();
                 break;
             case RIGHT:
-                map.getPlayer().move(1,0);
+                map.getPlayer().move(1, 0);
+                makeEnemyMove();
                 refresh();
                 break;
         }
@@ -91,8 +97,8 @@ public class Main extends Application {
     private void refresh() {
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        int centerX = (int)(canvas.getWidth()/64);
-        int centerY = (int)(canvas.getHeight()/64) - 1;
+        int centerX = (int)(canvas.getWidth()/(Tiles.TILE_WIDTH*2));
+        int centerY = (int)(canvas.getHeight()/(Tiles.TILE_WIDTH*2)) - 1;
         int[] shift = new int[2];
         if(map.getPlayer().getX() > centerX){
             shift[0] = map.getPlayer().getX() - centerX;
@@ -121,7 +127,19 @@ public class Main extends Application {
                 }
             }
         }
-        healthLabel.setText("" + map.getPlayer().getHealth());
         attackLabel.setText("" + map.getPlayer().getAttack());
+        healthLabel.setText("❤".repeat(map.getPlayer().getHealth()));
+    }
+
+    private void makeEnemyMove(){
+        for (int i = 0; i < map.getEnemys().size(); i++) {
+            if (map.getEnemys().get(i) instanceof Spider){
+                int[] nextStepSpider = ((Spider) map.getEnemys().get(i)).nextStep();
+                map.getEnemys().get(i).move(nextStepSpider[0],nextStepSpider[1]);
+            }else if(map.getEnemys().get(i) instanceof Cyclops){
+                int[] calculateNextStep = ((Cyclops) map.getEnemys().get(i)).nextStepCyclop();
+                map.getEnemys().get(i).move(calculateNextStep[0], calculateNextStep[1]);
+            }
+        }
     }
 }

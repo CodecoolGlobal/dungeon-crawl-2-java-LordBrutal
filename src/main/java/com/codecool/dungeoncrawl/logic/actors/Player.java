@@ -9,6 +9,7 @@ import com.codecool.dungeoncrawl.logic.items.Sword;
 import java.util.ArrayList;
 
 public class Player extends Actor {
+    private String name;
 
     private ArrayList<Item> inventory = new ArrayList<>();
     private int defense = 0;
@@ -16,6 +17,7 @@ public class Player extends Actor {
     public Player(Cell cell) {
         super(cell);
         this.attack = 5;
+        this.name = "player";
     }
 
 
@@ -24,7 +26,11 @@ public class Player extends Actor {
     }
 
     public String getTileName() {
-        return "player";
+        return this.name;
+    }
+
+    public void setTileName(String newName) {
+        this.name = newName;
     }
 
     public void addToInventory() {
