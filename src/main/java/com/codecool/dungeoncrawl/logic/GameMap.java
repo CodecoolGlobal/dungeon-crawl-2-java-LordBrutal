@@ -1,6 +1,7 @@
 package com.codecool.dungeoncrawl.logic;
 
 import com.codecool.dungeoncrawl.logic.actors.Actor;
+import com.codecool.dungeoncrawl.logic.actors.Cyclops;
 import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.logic.actors.Spider;
 
@@ -13,6 +14,7 @@ public class GameMap {
 
     private Player player;
     private Spider spider;
+    private Cyclops cyclops;
 
     public GameMap(int width, int height, CellType defaultCellType) {
         this.width = width;
@@ -51,5 +53,13 @@ public class GameMap {
 
     public Spider getSpider() {
         return spider;
+    }
+
+    public void setCyclops(Cyclops cyclops){
+        this.cyclops = cyclops;
+    }
+
+    public Cyclops getCyclops(){
+        return this.cyclops;
     }
 }

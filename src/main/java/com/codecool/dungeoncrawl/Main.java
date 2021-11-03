@@ -4,6 +4,7 @@ import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.CellType;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.MapLoader;
+import com.codecool.dungeoncrawl.logic.actors.Spider;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -112,5 +113,7 @@ public class Main extends Application {
     private void makeEnemyMove(){
         int[] nextStepSpider = map.getSpider().nextStep();
         map.getSpider().move(nextStepSpider[0],nextStepSpider[1]);
+        int[] calculateNextStep = map.getCyclops().nextStepCyclop();
+        map.getCyclops().move(calculateNextStep[0], calculateNextStep[1]);
     }
 }

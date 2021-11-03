@@ -58,7 +58,7 @@ public class MapLoader {
                             break;
                         case 'c':
                             cell.setType(CellType.FLOOR);
-                            new Cyclops(cell);
+                            map.setCyclops(new Cyclops(cell));
                             break;
                         case 'w':
                             cell.setType(CellType.FLOOR);
