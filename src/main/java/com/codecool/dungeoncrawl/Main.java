@@ -28,6 +28,7 @@ public class Main extends Application {
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
     Button pickUpButton = new Button("Pick up!");
+    Label attackLabel = new Label();
 
     public static void main(String[] args) {
         launch(args);
@@ -41,8 +42,10 @@ public class Main extends Application {
 
         ui.add(new Label("Health: "), 0, 0);
         ui.add(healthLabel, 1, 0);
+        ui.add(new Label("Attack: "), 0, 1);
+        ui.add(attackLabel, 1, 1);
         pickUpButton.setFocusTraversable(false);
-        pickUpButton.setOnMouseClicked(mouseEvent -> map.getPlayer().addToInventory());
+        pickUpButton.setOnMouseClicked(mouseEvent -> pickUpItem());
         ui.add(pickUpButton, 0, 2);
 
         BorderPane borderPane = new BorderPane();
@@ -57,6 +60,11 @@ public class Main extends Application {
 
         primaryStage.setTitle("Dungeon Crawl");
         primaryStage.show();
+    }
+
+    private void pickUpItem() {
+        map.getPlayer().addToInventory();
+        refresh();
     }
 
     private void onKeyPressed(KeyEvent keyEvent) {
@@ -114,5 +122,6 @@ public class Main extends Application {
             }
         }
         healthLabel.setText("" + map.getPlayer().getHealth());
+        attackLabel.setText("" + map.getPlayer().getAttack());
     }
 }
