@@ -28,7 +28,7 @@ public abstract class Actor implements Drawable {
             nextCell.setActor(this);
             cell = nextCell;
         }
-        else if (actor instanceof Player && nextCell.getActor() != null) {
+        else if (nextCell.getActor() != null) {
             attack(nextCell.getActor());
         }else if (nextCell.getType().equals(CellType.BREAKABLEWALL)) {
             if ((actor instanceof Player && cell.getMap().getPlayer().getHasPickAxe()) || actor instanceof Cyclops) {
