@@ -54,6 +54,9 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             new Key(cell, "blue");
                             break;
+                        case 'x':
+                            cell.setType(CellType.BREAKABLEWALL);
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }
