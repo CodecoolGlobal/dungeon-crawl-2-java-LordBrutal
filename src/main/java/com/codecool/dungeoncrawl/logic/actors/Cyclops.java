@@ -2,12 +2,15 @@ package com.codecool.dungeoncrawl.logic.actors;
 
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.GameMap;
+import com.codecool.dungeoncrawl.utils.Util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Cyclops extends Actor{
+public class Cyclops extends Enemy{
     public Cyclops(Cell cell) {
         super(cell);
+        this.attack = 3;
     }
 
     private int[] getPlayerPosition(){
@@ -29,8 +32,6 @@ public class Cyclops extends Actor{
     private int[] generatePosition(){
         int[] playerPosition = getPlayerPosition();
         int[] cyclopsPosi = getCyclopsPosition();
-        System.out.println(Arrays.toString(playerPosition));
-        System.out.println(Arrays.toString(cyclopsPosi));
         if (playerPosition[1] < cyclopsPosi[1]){
             return new int[]{-1,0};
         }if (playerPosition[1] > cyclopsPosi[1]){
@@ -43,6 +44,21 @@ public class Cyclops extends Actor{
 
     private int[] dodgewall(){
         int[] basicposi = generatePosition();
+        Cell newcell = super.getCell();
+        System.out.println(newcell.getNeighbor(basicposi[0],basicposi[1]).getTileName());
+        if(newcell.getNeighbor(basicposi[0],basicposi[1]).getTileName() == "wall"){
+            ArrayList<int[]> movements = new ArrayList<>();
+            movements.add(new int[]{0,-1});
+            movements.add(new int[]{-1,0});
+            movements.add(new int[]{0,1});
+            movements.add(new int[]{1,0});
+            for (int i = 0; i < movements.size(); i++) {
+                if (movements.get(i)[0] == basicposi[0] && movements.get(i)[1] == basicposi[1]){
+                    movements.remove(i);
+                }
+            }
+            return movements.get(Util.generateRandomBetween(0,2));
+        }
         return basicposi;
     }
 
