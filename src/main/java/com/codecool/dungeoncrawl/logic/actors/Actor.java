@@ -9,7 +9,8 @@ import java.util.Objects;
 public abstract class Actor implements Drawable {
     private Cell cell;
     private int health = 10;
-    private int  attack = 2;
+    protected int attack;
+
 
     public Actor(Cell cell) {
         this.cell = cell;
@@ -34,9 +35,9 @@ public abstract class Actor implements Drawable {
     }
     public void attack(Actor skeleton) {
         if (skeleton.getHealth() > 0) {
-            skeleton.setHealth(skeleton.getHealth()-this.attack);
+            skeleton.setHealth(skeleton.getHealth() - this.attack);
             if (skeleton.getHealth() > 0) {
-                this.health -=2;
+                this.health -= skeleton.attack;
             }
         }
     }
