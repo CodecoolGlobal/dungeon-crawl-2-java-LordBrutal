@@ -64,6 +64,15 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             map.setEnemys(new Spider(cell));
                             break;
+                        case 'x':
+                            cell.setType(CellType.BREAKABLEWALL);
+                            break;
+                        case '~':
+                            cell.setType(CellType.WATER);
+                            break;
+                        case 'g':
+                            cell.setType(CellType.GRASS);
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }

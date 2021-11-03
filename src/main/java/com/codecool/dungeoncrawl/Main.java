@@ -81,8 +81,8 @@ public class Main extends Application {
     private void refresh() {
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        int centerX = (int)(canvas.getWidth()/64);
-        int centerY = (int)(canvas.getHeight()/64) - 1;
+        int centerX = (int)(canvas.getWidth()/(Tiles.TILE_WIDTH*2));
+        int centerY = (int)(canvas.getHeight()/(Tiles.TILE_WIDTH*2)) - 1;
         int[] shift = new int[2];
         if(map.getPlayer().getX() > centerX){
             shift[0] = map.getPlayer().getX() - centerX;
