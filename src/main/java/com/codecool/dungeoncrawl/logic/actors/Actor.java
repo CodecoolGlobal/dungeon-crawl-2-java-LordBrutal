@@ -35,7 +35,7 @@ public abstract class Actor implements Drawable {
             if ((actor instanceof Player && ((Player)actor).getHasPickAxe()) || actor instanceof Cyclops) {
                 nextCell.setType(CellType.FLOOR);
             }
-        } else if (nextCell.getType().equals(CellType.DOOR)) {
+        } else if (nextCell.getType().equals(CellType.DOOR) && ((Player) actor).getHasKey()) {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
