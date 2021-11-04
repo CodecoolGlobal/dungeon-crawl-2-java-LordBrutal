@@ -125,7 +125,7 @@ public class Main extends Application {
             }
         }
         attackLabel.setText("" + map.getPlayer().getAttack());
-        healthLabel.setText(map.getPlayer().getHealth() <= 0?"":"❤".repeat(map.getPlayer().getHealth()));
+        healthLabel.setText("" + map.getPlayer().getHealth());
         defenseLabel.setText("" + map.getPlayer().getDefense());
         if(map.getPlayer().getHealth() <= 0) {
             System.out.println("YOU DIED");
