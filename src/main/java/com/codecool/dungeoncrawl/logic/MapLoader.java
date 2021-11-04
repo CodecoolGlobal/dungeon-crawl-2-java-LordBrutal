@@ -68,6 +68,10 @@ public class MapLoader {
                         case 'D':
                             cell.setType(CellType.DOOR);
                             break;
+                        case 'B':
+                            cell.setType(CellType.FLOOR);
+                            new Key(cell, Color.BLUE.getColor());
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }
@@ -79,7 +83,7 @@ public class MapLoader {
     }
 
     private static void generateItems(GameMap map) {
-        String[] items = { "Potion", "Key", "PickAxe", "Shield", "Sword"};
+        String[] items = { "Potion", "PickAxe", "Shield", "Sword"};
         for(String item: items) {
             while (true) {
                 Random random1 = new Random();
@@ -91,9 +95,6 @@ public class MapLoader {
                     switch (item) {
                         case "Potion":
                             new Potion(cell);
-                            break;
-                        case "Key":
-                            new Key(cell, Color.BLUE.getColor());
                             break;
                         case "PickAxe":
                             new PickAxe(cell);
