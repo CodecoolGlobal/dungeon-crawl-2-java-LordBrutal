@@ -132,6 +132,7 @@ public class Main extends Application {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Game Over");
             alert.setContentText("Restart?");
+            alert.setHeaderText("You have died!");
             Optional<ButtonType> result = alert.showAndWait();
             if ((result.isPresent()) && (result.get() == ButtonType.OK)) {
                 startLevel(1);
@@ -165,6 +166,7 @@ public class Main extends Application {
             map.getPlayer().setInventory(oldPlayer.getInventory());
             map.getPlayer().getInventory().remove("Blue key");
             map.getPlayer().getInventory().remove("PickAxe");
+            list.setItems(map.getPlayer().getInventory());
             map.getPlayer().setHasSword(oldPlayer.getHasSword());
             if(oldPlayer.getHasSword()) {
                 map.getPlayer().setTileName("player with sword");
@@ -202,7 +204,6 @@ public class Main extends Application {
         attackLabel = new Label();
         defenseLabel = new Label();
         list = new ListView<>();
-        list.setItems(map.getPlayer().getInventory());
         ui = addUi();
         borderPane.setRight(ui);
         refresh();
