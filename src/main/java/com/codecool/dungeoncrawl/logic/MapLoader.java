@@ -7,6 +7,7 @@ import com.codecool.dungeoncrawl.logic.items.*;
 import com.codecool.dungeoncrawl.logic.actors.enemys.Spider;
 
 import java.io.InputStream;
+import java.util.Random;
 import java.util.Scanner;
 
 public class MapLoader {
@@ -15,7 +16,6 @@ public class MapLoader {
         Scanner scanner = new Scanner(is);
         int width = scanner.nextInt();
         int height = scanner.nextInt();
-
         scanner.nextLine(); // empty line
 
         GameMap map = new GameMap(width, height, CellType.EMPTY);
@@ -41,22 +41,6 @@ public class MapLoader {
                         case '@':
                             cell.setType(CellType.FLOOR);
                             map.setPlayer(new Player(cell));
-                            break;
-                        case 'S':
-                            cell.setType(CellType.FLOOR);
-                            new Sword(cell);
-                            break;
-                        case 'H':
-                            cell.setType(CellType.FLOOR);
-                            new Shield(cell);
-                            break;
-                        case 'B':
-                            cell.setType(CellType.FLOOR);
-                            new Key(cell, Color.BLUE.getColor());
-                            break;
-                        case 'P':
-                            cell.setType(CellType.FLOOR);
-                            new Potion(cell);
                             break;
                         case 'c':
                             cell.setType(CellType.FLOOR);
@@ -84,16 +68,46 @@ public class MapLoader {
                         case 'D':
                             cell.setType(CellType.DOOR);
                             break;
-                        case 'p':
-                            cell.setType(CellType.FLOOR);
-                            new PickAxe(cell);
-                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }
                 }
             }
         }
+        generateItems(map);
         return map;
+    }
+
+    private static void generateItems(GameMap map) {
+        String[] items = { "Potion", "Key", "PickAxe", "Shield", "Sword"};
+        for(String item: items) {
+            while (true) {
+                Random random1 = new Random();
+                int h = random1.nextInt(map.getHeight());
+                Random random2 = new Random();
+                int w = random2.nextInt(map.getWidth());
+                Cell cell = map.getCell(w, h);
+                if (cell.getType().equals(CellType.FLOOR) && cell.getActor() == null && cell.getItem() == null) {
+                    switch (item) {
+                        case "Potion":
+                            new Potion(cell);
+                            break;
+                        case "Key":
+                            new Key(cell, Color.BLUE.getColor());
+                            break;
+                        case "PickAxe":
+                            new PickAxe(cell);
+                            break;
+                        case "Shield":
+                            new Shield(cell);
+                            break;
+                        case "Sword":
+                            new Sword(cell);
+                            break;
+                    }
+                    break;
+                }
+            }
+        }
     }
 }

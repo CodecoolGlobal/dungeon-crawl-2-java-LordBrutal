@@ -1,12 +1,12 @@
 60 30
 hhhggg~ggggggggg########ggggggggggggggggggg
 ggggg~~~hggggggg#......##################gg
-gggg~~~~~hgggggg#.w.S..xxxxxxxxxxxxxxxxx#g~
+gggg~~~~~hgggggg#.w....xxxxxxxxxxxxxxxxx#g~
 ggggg~~~hggggggg#......################x#~~
 gTgggg~ggggggTgg#.######gggggg~~ghhTTg#x#g~
 #################.#ggggg~~~~~~~gggghhg#x#gg
-#...Bxxxxxxxxxxxx.#gg~~~~~~~gggggggggg#x#gg
-#.s..############.#g~~~~~ggggggggggggg#x#gg
+#....xxxxxxxxxxxx.#gg~~~~~~~gggggggggg#x#gg
+#....############.#g~~~~~ggggggggggggg#x#gg
 #.w..#hgggg~~ggg#.#ggg~TThgggggggg~ggg#x#gg
 #....#ggggg~~~gg#.##gggggggg#####g~~gg#x#gg
 #.##############...##########...#######x###
@@ -15,12 +15,12 @@ gTgggg~ggggggTgg#.######gggggg~~ghhTTg#x#g~
 #.#.#gggg~~gggg##.##hhgggggg#####~~~gg#x#gg
 #.#.#Tgg~~~~~ggg#.#gggg~~~~~~~gg~~~~~g#x#h~
 #.#.#######g~~gg#.#gg~~~~~gTg~~~~~~~~g#x#g~
-#.#.......#g~~gg#.#~~~~~~ghT~~~~~~~ggg#P#gg
+#.#.......#g~~gg#.#~~~~~~ghT~~~~~~~ggg#x#gg
 #.#...s...#ggggg#.#g~~~~~g~~~~~~gggggg#x#gh
-#.#H......#gghhh#.#gg~~gggggggggghhTT##x###
-#.###############.####################....#
+#.#.......#gghhh#.#gg~~gggggggggghhTT##x###
+#.#####x#########.####################....#
 #.........................w............s..#
-######################################...p#
+######################################....#
 TThgggggggggggggggggggTTTTTTTTT~~~~~~######
 gggggggTTgggggggggggggTTT~~~~~~~~~~~~~~~~~T
 hhTTTTTTTTTTTTgggggggggggggggghhg~~~~~~~~~~
