@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
     GameMap map = MapLoader.loadMap(1);
     BorderPane borderPane;
+    GridPane ui;
     Canvas canvas = new Canvas(
             Math.min(map.getWidth(), 30) * Tiles.TILE_WIDTH,
             Math.min(map.getHeight(), 22) * Tiles.TILE_WIDTH);
@@ -41,7 +42,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        GridPane ui = addUi();
+        ui = addUi();
 
         borderPane = new BorderPane();
 
@@ -169,6 +170,8 @@ public class Main extends Application {
             defenseLabel = new Label();
             list = new ListView<>();
             list.setItems(map.getPlayer().getInventory());
+            ui = addUi();
+            borderPane.setRight(ui);
         }
     }
 
