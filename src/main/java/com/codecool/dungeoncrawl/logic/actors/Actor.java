@@ -4,6 +4,7 @@ import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.CellType;
 import com.codecool.dungeoncrawl.logic.Drawable;
 import com.codecool.dungeoncrawl.logic.actors.enemys.Cyclops;
+import com.codecool.dungeoncrawl.logic.actors.enemys.Enemy;
 
 
 public abstract class Actor implements Drawable {
@@ -36,11 +37,24 @@ public abstract class Actor implements Drawable {
             }
         }
     }
-    public void attack(Actor enemy) {
-        if (enemy.getHealth() > 0) {
-            enemy.setHealth(enemy.getHealth() - this.attack);
-            if (enemy.getHealth() > 0) {
-                this.health -= enemy.attack;
+    public void attack(Actor target) {
+        if (target instanceof Player) {
+            if (target.getHealth() > 0) {
+                if (this.attack - ((Player) target).getDefense()> 0) {
+                    target.setHealth(target.getHealth() - (this.attack - ((Player) target).getDefense()));
+                }
+                if (target.getHealth() > 0) {
+                    this.health -= target.attack;
+                }
+            }
+        }else if (target instanceof Enemy) {
+            if (target.getHealth() > 0) {
+                target.setHealth(target.getHealth() - this.attack);
+                if (target.getHealth() > 0) {
+                    if ((target.attack - cell.getMap().getPlayer().getDefense()) > 0) {
+                        this.health -= (target.attack - cell.getMap().getPlayer().getDefense());
+                    }
+                }
             }
         }
     }
