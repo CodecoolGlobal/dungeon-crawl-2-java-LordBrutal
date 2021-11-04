@@ -12,14 +12,14 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
+import java.util.Optional;
 
 
 public class Main extends Application {
@@ -129,7 +129,15 @@ public class Main extends Application {
         healthLabel.setText("" + map.getPlayer().getHealth());
         defenseLabel.setText("" + map.getPlayer().getDefense());
         if(map.getPlayer().getHealth() <= 0) {
-            System.out.println("YOU DIED");
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Game Over");
+            alert.setContentText("Restart?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if ((result.isPresent()) && (result.get() == ButtonType.OK)) {
+                startLevel(1);
+            } else {
+                System.exit(0);
+            }
         }
     }
 
@@ -150,7 +158,7 @@ public class Main extends Application {
         int x = map.getPlayer().getX();
         int y = map.getPlayer().getY();
         if(map.getCell(x, y).getType().equals(CellType.DOOR)) {
-            map = MapLoader.loadMap(2);
+            startLevel(2);
             map.getPlayer().setHealth(oldPlayer.getHealth());
             map.getPlayer().setDefense(oldPlayer.getDefense());
             map.getPlayer().setAttack(oldPlayer.getAttack());
@@ -161,17 +169,6 @@ public class Main extends Application {
             if(oldPlayer.getHasSword()) {
                 map.getPlayer().setTileName("player with sword");
             }
-            canvas = new Canvas(
-                    Math.min(map.getWidth(), 35) * Tiles.TILE_WIDTH,
-                    Math.min(map.getHeight(), 22) * Tiles.TILE_WIDTH);
-            healthLabel = new Label();
-            pickUpButton = new Button("Pick up!");
-            attackLabel = new Label();
-            defenseLabel = new Label();
-            list = new ListView<>();
-            list.setItems(map.getPlayer().getInventory());
-            ui = addUi();
-            borderPane.setRight(ui);
         }
     }
 
@@ -193,5 +190,21 @@ public class Main extends Application {
         ui.add(new Label("Inventory"), 0, 3);
         ui.add(list, 0, 4);
         return ui;
+    }
+
+    private void startLevel(int level) {
+        map = MapLoader.loadMap(level);
+        canvas = new Canvas(
+                Math.min(map.getWidth(), 35) * Tiles.TILE_WIDTH,
+                Math.min(map.getHeight(), 22) * Tiles.TILE_WIDTH);
+        healthLabel = new Label();
+        pickUpButton = new Button("Pick up!");
+        attackLabel = new Label();
+        defenseLabel = new Label();
+        list = new ListView<>();
+        list.setItems(map.getPlayer().getInventory());
+        ui = addUi();
+        borderPane.setRight(ui);
+        refresh();
     }
 }
