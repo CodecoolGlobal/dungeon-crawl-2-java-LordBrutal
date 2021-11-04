@@ -1,8 +1,10 @@
 package com.codecool.dungeoncrawl;
 
 import com.codecool.dungeoncrawl.logic.Cell;
+import com.codecool.dungeoncrawl.logic.CellType;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.MapLoader;
+import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.logic.actors.enemys.Cyclops;
 import com.codecool.dungeoncrawl.logic.actors.enemys.Spider;
 import javafx.application.Application;
@@ -21,9 +23,10 @@ import javafx.stage.Stage;
 
 
 public class Main extends Application {
-    GameMap map = MapLoader.loadMap();
+    GameMap map = MapLoader.loadMap(1);
+    BorderPane borderPane;
     Canvas canvas = new Canvas(
-            Math.min(map.getWidth(), 35) * Tiles.TILE_WIDTH,
+            Math.min(map.getWidth(), 30) * Tiles.TILE_WIDTH,
             Math.min(map.getHeight(), 22) * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
@@ -38,25 +41,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        list.setFocusTraversable(false);
-        list.setItems(map.getPlayer().getInventory());
-        pickUpButton.setFocusTraversable(false);
-        pickUpButton.setOnMouseClicked(mouseEvent -> pickUpItem());
-        GridPane ui = new GridPane();
-        ui.setPrefWidth(400);
-        ui.setPadding(new Insets(10));
+        GridPane ui = addUi();
 
-        ui.add(new Label("Health: "), 0, 0);
-        ui.add(healthLabel, 1, 0);
-        ui.add(new Label("Attack: "), 0, 1);
-        ui.add(attackLabel, 1, 1);
-        ui.add(new Label("Defense: "), 0, 2);
-        ui.add(defenseLabel, 1,2);
-        ui.add(pickUpButton, 0, 5);
-        ui.add(new Label("Inventory"), 0, 3);
-        ui.add(list, 0, 4);
-
-        BorderPane borderPane = new BorderPane();
+        borderPane = new BorderPane();
 
         borderPane.setCenter(canvas);
         borderPane.setRight(ui);
@@ -80,21 +67,25 @@ public class Main extends Application {
             case UP:
                 map.getPlayer().move(0, -1);
                 makeEnemyMove();
+                checkLevelWin();
                 refresh();
                 break;
             case DOWN:
                 map.getPlayer().move(0, 1);
                 makeEnemyMove();
+                checkLevelWin();
                 refresh();
                 break;
             case LEFT:
                 map.getPlayer().move(-1, 0);
                 makeEnemyMove();
+                checkLevelWin();
                 refresh();
                 break;
             case RIGHT:
                 map.getPlayer().move(1, 0);
                 makeEnemyMove();
+                checkLevelWin();
                 refresh();
                 break;
         }
@@ -134,8 +125,11 @@ public class Main extends Application {
             }
         }
         attackLabel.setText("" + map.getPlayer().getAttack());
-        healthLabel.setText(map.getPlayer().getHealth() <= 0?"":"❤".repeat(map.getPlayer().getHealth()));
+        healthLabel.setText("" + map.getPlayer().getHealth());
         defenseLabel.setText("" + map.getPlayer().getDefense());
+        if(map.getPlayer().getHealth() <= 0) {
+            System.out.println("YOU DIED");
+        }
     }
 
     private void makeEnemyMove(){
@@ -148,5 +142,53 @@ public class Main extends Application {
                 map.getEnemys().get(i).move(calculateNextStep[0], calculateNextStep[1]);
             }
         }
+    }
+
+    private void checkLevelWin() {
+        Player oldPlayer = map.getPlayer();
+        int x = map.getPlayer().getX();
+        int y = map.getPlayer().getY();
+        if(map.getCell(x, y).getType().equals(CellType.DOOR)) {
+            map = MapLoader.loadMap(2);
+            map.getPlayer().setHealth(oldPlayer.getHealth());
+            map.getPlayer().setDefense(oldPlayer.getDefense());
+            map.getPlayer().setAttack(oldPlayer.getAttack());
+            map.getPlayer().setInventory(oldPlayer.getInventory());
+            map.getPlayer().getInventory().remove("Blue key");
+            map.getPlayer().getInventory().remove("PickAxe");
+            map.getPlayer().setHasSword(oldPlayer.getHasSword());
+            if(oldPlayer.getHasSword()) {
+                map.getPlayer().setTileName("player with sword");
+            }
+            canvas = new Canvas(
+                    Math.min(map.getWidth(), 35) * Tiles.TILE_WIDTH,
+                    Math.min(map.getHeight(), 22) * Tiles.TILE_WIDTH);
+            healthLabel = new Label();
+            pickUpButton = new Button("Pick up!");
+            attackLabel = new Label();
+            defenseLabel = new Label();
+            list = new ListView<>();
+            list.setItems(map.getPlayer().getInventory());
+        }
+    }
+
+    private GridPane addUi() {
+        list.setFocusTraversable(false);
+        list.setItems(map.getPlayer().getInventory());
+        pickUpButton.setFocusTraversable(false);
+        pickUpButton.setOnMouseClicked(mouseEvent -> pickUpItem());
+        GridPane ui = new GridPane();
+        ui.setPrefWidth(400);
+        ui.setPadding(new Insets(10));
+        ui.add(new Label("Health: "), 0, 0);
+        ui.add(healthLabel, 1, 0);
+        ui.add(new Label("Attack: "), 0, 1);
+        ui.add(attackLabel, 1, 1);
+        ui.add(new Label("Defense: "), 0, 2);
+        ui.add(defenseLabel, 1,2);
+        ui.add(pickUpButton, 0, 5);
+        ui.add(new Label("Inventory"), 0, 3);
+        ui.add(list, 0, 4);
+        return ui;
     }
 }

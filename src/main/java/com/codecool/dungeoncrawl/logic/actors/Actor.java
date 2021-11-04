@@ -1,8 +1,6 @@
 package com.codecool.dungeoncrawl.logic.actors;
 
-import com.codecool.dungeoncrawl.logic.Cell;
-import com.codecool.dungeoncrawl.logic.CellType;
-import com.codecool.dungeoncrawl.logic.Drawable;
+import com.codecool.dungeoncrawl.logic.*;
 import com.codecool.dungeoncrawl.logic.actors.enemys.Cyclops;
 import com.codecool.dungeoncrawl.logic.actors.enemys.Enemy;
 
@@ -34,9 +32,13 @@ public abstract class Actor implements Drawable {
                 attack(nextCell.getActor());
             }
         }else if (nextCell.getType().equals(CellType.BREAKABLEWALL)) {
-            if ((actor instanceof Player && cell.getMap().getPlayer().getHasPickAxe()) || actor instanceof Cyclops) {
+            if ((actor instanceof Player && ((Player)actor).getHasPickAxe()) || actor instanceof Cyclops) {
                 nextCell.setType(CellType.FLOOR);
             }
+        } else if (nextCell.getType().equals(CellType.DOOR)) {
+            cell.setActor(null);
+            nextCell.setActor(this);
+            cell = nextCell;
         }
     }
     public void attack(Actor target) {
@@ -63,6 +65,10 @@ public abstract class Actor implements Drawable {
 
     public int getAttack() {
         return attack;
+    }
+
+    public void setAttack(int attack) {
+        this.attack = attack;
     }
 
     public int getHealth() {
