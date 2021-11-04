@@ -30,7 +30,9 @@ public abstract class Actor implements Drawable {
             cell = nextCell;
         }
         else if (nextCell.getActor() != null) {
-            attack(nextCell.getActor());
+            if (!(this.getTileName() != "player" && nextCell.getTileName() != "player")) {
+                attack(nextCell.getActor());
+            }
         }else if (nextCell.getType().equals(CellType.BREAKABLEWALL)) {
             if ((actor instanceof Player && cell.getMap().getPlayer().getHasPickAxe()) || actor instanceof Cyclops) {
                 nextCell.setType(CellType.FLOOR);
