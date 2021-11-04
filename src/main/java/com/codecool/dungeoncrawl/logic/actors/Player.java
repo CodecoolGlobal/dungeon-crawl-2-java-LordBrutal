@@ -8,9 +8,11 @@ import javafx.collections.ObservableList;
 public class Player extends Actor {
     private String name;
 
-    private final ObservableList<String> inventory = FXCollections.observableArrayList();
+    private ObservableList<String> inventory = FXCollections.observableArrayList();
     private int defense = 0;
     private boolean hasPickAxe = false;
+    private boolean hasKey = false;
+    private boolean hasSword = false;
 
     public Player(Cell cell) {
         super(cell);
@@ -38,7 +40,12 @@ public class Player extends Actor {
             switch (itemClass) {
                 case "Sword":
                     this.attack += ((Sword)item).getAttackModifier();
-                    setTileName("player with sword");
+                    if(hasSword) {
+                        setTileName("player with two swords");
+                    } else {
+                        setTileName("player with sword");
+                        hasSword = true;
+                    }
                     break;
                 case "Shield":
                     defense += ((Shield) item).getDefenseModifier();
@@ -48,6 +55,9 @@ public class Player extends Actor {
                     break;
                 case "PickAxe":
                     hasPickAxe = true;
+                    break;
+                case "Key":
+                    hasKey = true;
                     break;
             }
             if (item instanceof Key) {
@@ -66,7 +76,27 @@ public class Player extends Actor {
         return hasPickAxe;
     }
 
+    public boolean getHasKey() {
+        return hasKey;
+    }
+
     public int getDefense() {
         return defense;
+    }
+
+    public void setDefense(int defense) {
+        this.defense = defense;
+    }
+
+    public void setInventory(ObservableList<String> inventory) {
+        this.inventory = inventory;
+    }
+
+    public boolean getHasSword() {
+        return hasSword;
+    }
+
+    public void setHasSword(boolean hasSword) {
+        this.hasSword = hasSword;
     }
 }
