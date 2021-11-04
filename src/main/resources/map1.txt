@@ -10,7 +10,7 @@ gTgggg~ggggggTgg#.######gggggg~~ghhTTg#x#g~
 #.w..#hgggg~~ggg#.#ggg~TThgggggggg~ggg#x#gg
 #....#ggggg~~~gg#.##gggggggg#####g~~gg#x#gg
 #.##############...##########...#######x###
-#.#..............@....S.......c..........wD
+#.#..............@............c..........wD
 #.#.############...##########...#######x###
 #.#.#gggg~~gggg##.##hhgggggg#####~~~gg#x#gg
 #.#.#Tgg~~~~~ggg#.#gggg~~~~~~~gg~~~~~g#x#h~
