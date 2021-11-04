@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Cyclops extends Enemy{
     public Cyclops(Cell cell) {
         super(cell);
-        this.attack = 3;
+        this.attack = 10;
     }
 
     private int[] getPlayerPosition(){
