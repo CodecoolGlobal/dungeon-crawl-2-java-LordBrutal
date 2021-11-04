@@ -2,7 +2,7 @@
 hhhggg~ggggggggg########ggggggggggggggggggg
 ggggg~~~hggggggg#......##################gg
 gggg~~~~~hgggggg#.w.S..xxxxxxxxxxxxxxxxx#g~
-ggggg~~~hggggggg#......##############g#x#~~
+ggggg~~~hggggggg#......################x#~~
 gTgggg~ggggggTgg#.######gggggg~~ghhTTg#x#g~
 #################.#ggggg~~~~~~~gggghhg#x#gg
 #...Bxxxxxxxxxxxx.#gg~~~~~~~gggggggggg#x#gg
@@ -10,7 +10,7 @@ gTgggg~ggggggTgg#.######gggggg~~ghhTTg#x#g~
 #.w..#hgggg~~ggg#.#ggg~TThgggggggg~ggg#x#gg
 #....#ggggg~~~gg#.##gggggggg#####g~~gg#x#gg
 #.##############...##########...#######x###
-#.#..............@............c..........wD
+#.#..............@....S.......c..........wD
 #.#.############...##########...#######x###
 #.#.#gggg~~gggg##.##hhgggggg#####~~~gg#x#gg
 #.#.#Tgg~~~~~ggg#.#gggg~~~~~~~gg~~~~~g#x#h~
