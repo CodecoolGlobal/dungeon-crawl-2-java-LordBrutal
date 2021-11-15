@@ -160,17 +160,13 @@ public class Main extends Application {
         int y = map.getPlayer().getY();
         if(map.getCell(x, y).getType().equals(CellType.DOOR)) {
             startLevel(2);
-            map.getPlayer().setHealth(oldPlayer.getHealth());
-            map.getPlayer().setDefense(oldPlayer.getDefense());
-            map.getPlayer().setAttack(oldPlayer.getAttack());
-            map.getPlayer().setInventory(oldPlayer.getInventory());
+            Cell playerCell = map.getPlayer().getCell();
+            oldPlayer.setCell(playerCell);
+            map.setPlayer(oldPlayer);
             map.getPlayer().getInventory().remove("Blue key");
             map.getPlayer().getInventory().remove("PickAxe");
             list.setItems(map.getPlayer().getInventory());
-            map.getPlayer().setHasSword(oldPlayer.getHasSword());
-            if(oldPlayer.getHasSword()) {
-                map.getPlayer().setTileName("player with sword");
-            }
+
         }
     }
 
