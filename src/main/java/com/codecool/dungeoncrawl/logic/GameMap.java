@@ -15,6 +15,7 @@ public class GameMap {
 
     private Player player;
     private ArrayList<Enemy> enemys = new ArrayList<>();
+    private ArrayList<int[]> breakableWalls = new ArrayList<>();
 
     public GameMap(int width, int height, int level, CellType defaultCellType) {
         this.level = level;
@@ -73,5 +74,15 @@ public class GameMap {
 
     public void setEnemys(Enemy enemy){
         enemys.add(enemy);
+    }
+
+    public void setBreakableWall(int x, int y) {
+        breakableWalls.add(new int[] {x, y});
+    }
+
+    public void removeBreakableWall(Cell wallCell) {
+        int x = wallCell.getX();
+        int y = wallCell.getY();
+        breakableWalls.remove(new int[]{x, y});
     }
 }

@@ -3,6 +3,7 @@ package com.codecool.dungeoncrawl.logic.actors;
 import com.codecool.dungeoncrawl.logic.*;
 import com.codecool.dungeoncrawl.logic.actors.enemys.Cyclops;
 import com.codecool.dungeoncrawl.logic.actors.enemys.Enemy;
+import com.codecool.dungeoncrawl.logic.create_map_components.BreakableWalls;
 
 
 public abstract class Actor implements Drawable {
@@ -34,6 +35,7 @@ public abstract class Actor implements Drawable {
         }else if (nextCell.getType().equals(CellType.BREAKABLEWALL)) {
             if ((actor instanceof Player && ((Player)actor).getHasPickAxe()) || actor instanceof Cyclops) {
                 nextCell.setType(CellType.FLOOR);
+                nextCell.getMap().removeBreakableWall(nextCell);
             }
         } else if (nextCell.getType().equals(CellType.DOOR) && cell.getMap().getPlayer().getHasKey()) {
             cell.setActor(null);

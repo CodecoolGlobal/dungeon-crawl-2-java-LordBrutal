@@ -1,6 +1,7 @@
 package com.codecool.dungeoncrawl.logic;
 
 import com.codecool.dungeoncrawl.logic.actors.Player;
+import com.codecool.dungeoncrawl.logic.create_map_components.BreakableWalls;
 import com.codecool.dungeoncrawl.logic.create_map_components.GenerateEnemys;
 import com.codecool.dungeoncrawl.logic.create_map_components.GenerateItems;
 
@@ -35,9 +36,6 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             map.setPlayer(new Player(cell));
                             break;
-                        case 'x':
-                            cell.setType(CellType.BREAKABLEWALL);
-                            break;
                         case '~':
                             cell.setType(CellType.WATER);
                             break;
@@ -59,6 +57,7 @@ public class MapLoader {
                 }
             }
         }
+        BreakableWalls.loadMapWalls(map,level);
         GenerateEnemys.generateEnemy(map);
         GenerateItems.generateItems(map);
         return map;
