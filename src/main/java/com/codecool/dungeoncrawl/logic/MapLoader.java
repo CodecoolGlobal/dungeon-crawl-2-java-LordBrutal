@@ -4,6 +4,7 @@ import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.logic.create_map_components.BreakableWalls;
 import com.codecool.dungeoncrawl.logic.create_map_components.GenerateEnemys;
 import com.codecool.dungeoncrawl.logic.create_map_components.GenerateItems;
+import com.codecool.dungeoncrawl.logic.create_map_components.GeneratePlayer;
 
 import java.io.InputStream;
 import java.util.Scanner;
@@ -11,6 +12,7 @@ import java.util.Scanner;
 public class MapLoader {
     public static GameMap loadMap(int level) {
         InputStream is = MapLoader.class.getResourceAsStream("/map" + level + ".txt");
+        assert is != null;
         Scanner scanner = new Scanner(is);
         int width = scanner.nextInt();
         int height = scanner.nextInt();
@@ -60,6 +62,7 @@ public class MapLoader {
         BreakableWalls.loadMapWalls(map,level);
         GenerateEnemys.generateEnemy(map);
         GenerateItems.generateItems(map);
+        GeneratePlayer.generatePlayer(map);
         return map;
     }
 }
