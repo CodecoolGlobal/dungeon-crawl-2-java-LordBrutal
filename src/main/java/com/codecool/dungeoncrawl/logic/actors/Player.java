@@ -83,20 +83,4 @@ public class Player extends Actor {
     public int getDefense() {
         return defense;
     }
-
-    public void setDefense(int defense) {
-        this.defense = defense;
-    }
-
-    public void setInventory(ObservableList<String> inventory) {
-        this.inventory = inventory;
-    }
-
-    public boolean getHasSword() {
-        return hasSword;
-    }
-
-    public void setHasSword(boolean hasSword) {
-        this.hasSword = hasSword;
-    }
 }
