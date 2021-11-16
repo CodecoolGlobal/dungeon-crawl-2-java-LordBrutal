@@ -3,6 +3,7 @@ package com.codecool.dungeoncrawl.logic;
 import com.codecool.dungeoncrawl.logic.actors.enemys.Cyclops;
 import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.logic.actors.enemys.Skeleton;
+import com.codecool.dungeoncrawl.logic.create_map_components.BreakableWalls;
 import com.codecool.dungeoncrawl.logic.items.*;
 import com.codecool.dungeoncrawl.logic.actors.enemys.Spider;
 
@@ -50,9 +51,6 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             map.setEnemys(new Spider(cell));
                             break;
-                        case 'x':
-                            cell.setType(CellType.BREAKABLEWALL);
-                            break;
                         case '~':
                             cell.setType(CellType.WATER);
                             break;
@@ -79,6 +77,7 @@ public class MapLoader {
             }
         }
         generateItems(map);
+        BreakableWalls.loadMapWalls(map,level);
         return map;
     }
 
