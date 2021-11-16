@@ -15,8 +15,7 @@ CREATE TABLE public.player (
     def integer NOT NULL,
     x integer NOT NULL,
     y integer NOT NULL,
-    items text NOT NULL,
-    enemies text NULL
+    items text NOT NULL
 );
 
 DROP TABLE IF EXISTS public.spider CASCADE;
