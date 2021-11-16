@@ -81,12 +81,14 @@ public class GameMap {
     }
 
     public String getBreakableWalls() {
-        StringBuilder str = new StringBuilder();
-        for(int[] coords: breakableWalls) {
-            str.append(coords[0]).append(',').append(coords[1]).append(" ");
+        StringBuilder sb = new StringBuilder();
+        String prefix = "";
+        for (int[] coords: breakableWalls) {
+            sb.append(prefix);
+            prefix = " ";
+            sb.append(coords[0]).append(",").append(coords[1]);
         }
-        str.deleteCharAt(-1);
-        return String.valueOf(str);
+        return String.valueOf(sb);
     }
 
     public void removeBreakableWall(Cell wallCell) {
