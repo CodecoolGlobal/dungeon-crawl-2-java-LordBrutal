@@ -1,15 +1,10 @@
 package com.codecool.dungeoncrawl.logic;
 
-import com.codecool.dungeoncrawl.logic.actors.enemys.Cyclops;
 import com.codecool.dungeoncrawl.logic.actors.Player;
-import com.codecool.dungeoncrawl.logic.actors.enemys.Skeleton;
-import com.codecool.dungeoncrawl.logic.create_map_components.GenerateItems;
 import com.codecool.dungeoncrawl.logic.create_map_components.GenerateEnemys;
-import com.codecool.dungeoncrawl.logic.items.*;
-import com.codecool.dungeoncrawl.logic.actors.enemys.Spider;
+import com.codecool.dungeoncrawl.logic.create_map_components.GenerateItems;
 
 import java.io.InputStream;
-import java.util.Random;
 import java.util.Scanner;
 
 public class MapLoader {
@@ -64,6 +59,7 @@ public class MapLoader {
                 }
             }
         }
+        GenerateEnemys.generateEnemy(map);
         GenerateItems.generateItems(map);
         return map;
     }
