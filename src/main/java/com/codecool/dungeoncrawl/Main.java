@@ -60,7 +60,7 @@ public class Main extends Application {
         primaryStage.show();
         // for test db saving is working
         db.setup();
-        db.save(map.getPlayer());
+        db.save(map);
     }
 
     private void pickUpItem() {

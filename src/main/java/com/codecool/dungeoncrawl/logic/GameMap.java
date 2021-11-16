@@ -56,9 +56,9 @@ public class GameMap {
 
 
     public Enemy getCyclops(){
-        for (int i = 0; i < enemys.size(); i++) {
-            if (enemys.get(i) instanceof Cyclops){
-                return enemys.get(i);
+        for (Enemy enemy : enemys) {
+            if (enemy instanceof Cyclops) {
+                return enemy;
             }
         }
         return null;
@@ -78,6 +78,15 @@ public class GameMap {
 
     public void setBreakableWall(int x, int y) {
         breakableWalls.add(new int[] {x, y});
+    }
+
+    public String getBreakableWalls() {
+        StringBuilder str = new StringBuilder();
+        for(int[] coords: breakableWalls) {
+            str.append(coords[0]).append(',').append(coords[1]).append(" ");
+        }
+        str.deleteCharAt(-1);
+        return String.valueOf(str);
     }
 
     public void removeBreakableWall(Cell wallCell) {
