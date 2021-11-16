@@ -68,4 +68,10 @@ public class GameMap {
     public void setBreakableWall(int x, int y) {
         breakableWalls.add(new int[] {x, y});
     }
+
+    public void removeBreakableWall(Cell wallCell) {
+        int x = wallCell.getX();
+        int y = wallCell.getY();
+        breakableWalls.remove(new int[]{x, y});
+    }
 }
