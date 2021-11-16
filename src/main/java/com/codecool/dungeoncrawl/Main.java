@@ -1,5 +1,6 @@
 package com.codecool.dungeoncrawl;
 
+import com.codecool.dungeoncrawl.dao.GameDatabaseManager;
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.CellType;
 import com.codecool.dungeoncrawl.logic.GameMap;
@@ -34,6 +35,7 @@ public class Main extends Application {
     Button pickUpButton = new Button("Pick up!");
     Label attackLabel = new Label();
     Label defenseLabel = new Label();
+    GameDatabaseManager db = new GameDatabaseManager();
     ListView<String> list = new ListView<>();
 
     public static void main(String[] args) {
@@ -56,6 +58,9 @@ public class Main extends Application {
 
         primaryStage.setTitle("Dungeon Crawl");
         primaryStage.show();
+        // for test db saving is working
+        db.setup();
+        db.savePlayer(map.getPlayer());
     }
 
     private void pickUpItem() {
