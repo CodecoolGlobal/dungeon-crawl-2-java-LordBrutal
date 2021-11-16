@@ -11,8 +11,11 @@ CREATE TABLE public.player (
     id serial NOT NULL PRIMARY KEY,
     player_name text NOT NULL,
     hp integer NOT NULL,
+    def integer NOT NULL,
     x integer NOT NULL,
-    y integer NOT NULL
+    y integer NOT NULL,
+    items text NOT NULL,
+    enemies text NULL
 );
 
 ALTER TABLE ONLY public.game_state

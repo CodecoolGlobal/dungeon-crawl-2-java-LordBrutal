@@ -5,6 +5,7 @@ import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.logic.actors.enemys.Enemy;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GameMap {
 
@@ -66,6 +67,11 @@ public class GameMap {
     public ArrayList<Enemy> getEnemys(){
         return enemys;
     }
+
+    public void setEnemys2(ArrayList<Enemy> enemys){
+        this.enemys = enemys;
+    }
+
     public void setEnemys(Enemy enemy){
         enemys.add(enemy);
     }
