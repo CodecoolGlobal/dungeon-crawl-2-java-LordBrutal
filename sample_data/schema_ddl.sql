@@ -10,7 +10,7 @@ CREATE TABLE public.player (
     id serial NOT NULL PRIMARY KEY,
     save_id integer NOT NULL,
     player_tile_name  text NOT NULL,
-    player_name text NOT NULL,
+    saved_name text NOT NULL,
     hp integer NOT NULL,
     def integer NOT NULL,
     x integer NOT NULL,
@@ -67,7 +67,6 @@ ALTER TABLE ONLY public.cyclops
 
 ALTER TABLE ONLY public.skeleton
     ADD CONSTRAINT fk_skeleton_save_id FOREIGN KEY (save_id) REFERENCES public.game_state(id);
-
 
 ALTER TABLE ONLY public.remowable_walls
     ADD CONSTRAINT fk_remowable_walls_save_id FOREIGN KEY (save_id) REFERENCES public.game_state(id);
