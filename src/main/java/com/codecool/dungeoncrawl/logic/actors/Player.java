@@ -83,4 +83,12 @@ public class Player extends Actor {
     public int getDefense() {
         return defense;
     }
+
+    public String getItems() {
+        String itemList = "";
+        for(String item : inventory) {
+            itemList += item + " ";
+        }
+        return itemList.strip();
+    }
 }
