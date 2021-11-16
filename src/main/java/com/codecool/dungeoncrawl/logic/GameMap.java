@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameMap {
+
+    private int level;
     private int width;
     private int height;
     private Cell[][] cells;
@@ -15,7 +17,8 @@ public class GameMap {
     private Player player;
     private ArrayList<Enemy> enemys = new ArrayList<>();
 
-    public GameMap(int width, int height, CellType defaultCellType) {
+    public GameMap(int width, int height, int level, CellType defaultCellType) {
+        this.level = level;
         this.width = width;
         this.height = height;
         cells = new Cell[width][height];
@@ -44,6 +47,10 @@ public class GameMap {
 
     public int getHeight() {
         return height;
+    }
+
+    public int getLevel() {
+        return level;
     }
 
 
