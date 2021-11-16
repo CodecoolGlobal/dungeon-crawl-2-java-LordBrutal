@@ -7,6 +7,8 @@ import com.codecool.dungeoncrawl.logic.actors.enemys.Enemy;
 import java.util.ArrayList;
 
 public class GameMap {
+
+    private int level;
     private int width;
     private int height;
     private Cell[][] cells;
@@ -15,7 +17,8 @@ public class GameMap {
     private ArrayList<Enemy> enemys = new ArrayList<>();
     private ArrayList<int[]> breakableWalls = new ArrayList<>();
 
-    public GameMap(int width, int height, CellType defaultCellType) {
+    public GameMap(int width, int height, int level, CellType defaultCellType) {
+        this.level = level;
         this.width = width;
         this.height = height;
         cells = new Cell[width][height];
@@ -46,6 +49,10 @@ public class GameMap {
         return height;
     }
 
+    public int getLevel() {
+        return level;
+    }
+
 
 
     public Enemy getCyclops(){
@@ -59,6 +66,10 @@ public class GameMap {
 
     public ArrayList<Enemy> getEnemys(){
         return enemys;
+    }
+
+    public void setEnemys2(ArrayList<Enemy> enemys){
+        this.enemys = enemys;
     }
 
     public void setEnemys(Enemy enemy){
