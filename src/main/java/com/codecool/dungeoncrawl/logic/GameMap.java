@@ -5,7 +5,6 @@ import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.logic.actors.enemys.Enemy;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class GameMap {
 
