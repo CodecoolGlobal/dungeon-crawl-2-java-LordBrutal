@@ -1,6 +1,7 @@
 package com.codecool.dungeoncrawl.dao;
 
 import com.codecool.dungeoncrawl.logic.GameMap;
+import com.codecool.dungeoncrawl.logic.actors.enemys.Enemy;
 import com.codecool.dungeoncrawl.logic.items.Item;
 import com.codecool.dungeoncrawl.model.EnemyModel;
 import com.codecool.dungeoncrawl.model.GameState;
@@ -13,6 +14,7 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 
 public class GameDatabaseManager {
     private GameStateDao gameState;
@@ -34,7 +36,7 @@ public class GameDatabaseManager {
     public void save(GameMap map) {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         GameState GameStateModel = new GameState(map.getLevel(), timestamp);
-        gameState.add(GameStateModel);
+        gameState.add(GameStateModel, "testSave");
         int saveId = GameStateModel.getId();
         PlayerModel model = new PlayerModel(map.getPlayer());
         playerDao.add(model, saveId);
@@ -47,7 +49,9 @@ public class GameDatabaseManager {
     public void saveEnemys(GameMap map, int savedId){
         for (int i = 0; i < map.getEnemys().size(); i++) {
             EnemyModel enemyMonster = new EnemyModel(map.getEnemys().get(i));
-            enemy.add(enemyMonster, savedId);
+            if (enemyMonster.getHp() > 0){
+                enemy.add(enemyMonster, savedId);
+            }
         }
 
     }
@@ -81,5 +85,9 @@ public class GameDatabaseManager {
 
     public PlayerModel loadPlayer(int saveId) {
         return playerDao.get(saveId);
+    }
+
+    public List<EnemyModel> loadEnemys(int SavedId){
+        return enemy.getAll(SavedId);
     }
 }

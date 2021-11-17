@@ -16,12 +16,13 @@ public class GameStateDaoJdbc implements GameStateDao {
     }
 
     @Override
-    public void add(GameState state) {
+    public void add(GameState state, String savedName) {
         try (Connection conn = dataSource.getConnection()) {
-            String sql = "INSERT INTO game_state (current_map, saved_at) VALUES (?, ?)";
+            String sql = "INSERT INTO game_state (current_map, saved_at, saved_name) VALUES (?, ?, ?)";
             PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, state.getCurrentMap());
             statement.setTimestamp(2, state.getSavedAt());
+            statement.setString(3, savedName);
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             resultSet.next();
