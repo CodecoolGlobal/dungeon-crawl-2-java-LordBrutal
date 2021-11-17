@@ -14,6 +14,7 @@ public class GeneratePlayer {
         if (level == 1) {
             PlayerModel player = db.loadPlayer(level);
             gameMap.setPlayer(new Player(gameMap.getCell(player.getX(), player.getY())));
+            gameMap.getPlayer().setAttack(player.getAttack());
         }
     }
 }

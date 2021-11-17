@@ -23,7 +23,6 @@ public class Player extends Actor {
 
     public Player(Cell cell) {
         super(cell);
-        this.attack = 5;
         this.name = "player";
     }
 
