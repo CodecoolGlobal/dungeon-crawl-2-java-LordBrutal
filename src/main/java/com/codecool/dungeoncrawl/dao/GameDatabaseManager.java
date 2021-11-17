@@ -1,7 +1,9 @@
 package com.codecool.dungeoncrawl.dao;
 
 import com.codecool.dungeoncrawl.logic.GameMap;
+import com.codecool.dungeoncrawl.logic.items.Item;
 import com.codecool.dungeoncrawl.model.GameState;
+import com.codecool.dungeoncrawl.model.ItemModel;
 import com.codecool.dungeoncrawl.model.PlayerModel;
 import com.codecool.dungeoncrawl.model.WallModel;
 import org.postgresql.ds.PGSimpleDataSource;
@@ -14,12 +16,14 @@ public class GameDatabaseManager {
     private GameStateDao gameState;
     private PlayerDao playerDao;
     private BreakableWallDao wallDao;
+    private ItemDao itemDao;
 
     public void setup() throws SQLException {
         DataSource dataSource = connect();
         playerDao = new PlayerDaoJdbc(dataSource);
         gameState = new GameStateDaoJdbc(dataSource);
         wallDao = new BreakableWallDaoJdbc(dataSource);
+        itemDao = new ItemDaoJdbc(dataSource);
     }
 
     public void save(GameMap map) {
@@ -31,6 +35,8 @@ public class GameDatabaseManager {
         playerDao.add(model, saveId);
         WallModel walls = new WallModel(map);
         wallDao.add(walls, saveId);
+        saveItems(map, saveId);
+
     }
 
     private DataSource connect() throws SQLException {
@@ -47,5 +53,12 @@ public class GameDatabaseManager {
         System.out.println("Connection ok.");
 
         return dataSource;
+    }
+
+    private void saveItems (GameMap map, int savedId) {
+        for (Item item : map.getItems()) {
+            ItemModel model = new ItemModel(item);
+            itemDao.add(model, savedId);
+        }
     }
 }
