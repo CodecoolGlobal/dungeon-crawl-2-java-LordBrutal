@@ -1,5 +1,6 @@
 package com.codecool.dungeoncrawl.logic;
 
+import com.codecool.dungeoncrawl.dao.GameDatabaseManager;
 import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.logic.create_map_components.BreakableWalls;
 import com.codecool.dungeoncrawl.logic.create_map_components.GenerateEnemys;
@@ -7,10 +8,12 @@ import com.codecool.dungeoncrawl.logic.create_map_components.GenerateItems;
 import com.codecool.dungeoncrawl.logic.create_map_components.GeneratePlayer;
 
 import java.io.InputStream;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class MapLoader {
-    public static GameMap loadMap(int level) {
+    public static GameMap loadMap(GameDatabaseManager db, int level, boolean isLoading) {
+
         InputStream is = MapLoader.class.getResourceAsStream("/map" + level + ".txt");
         assert is != null;
         Scanner scanner = new Scanner(is);
@@ -59,10 +62,19 @@ public class MapLoader {
                 }
             }
         }
-        BreakableWalls.loadMapWalls(map);
-        GenerateEnemys.generateEnemy(map);
-        GenerateItems.generateItems(map);
-        GeneratePlayer.generatePlayer(map);
+        int saveId = 1;
+        if(isLoading) {
+//            BreakableWalls.loadMapWalls(db, map, saveId);
+//            GenerateEnemys.generateEnemy(db, map, saveId);
+//            GenerateItems.generateItems(db, map, saveId); //load items
+//            GeneratePlayer.generatePlayer(db, map, saveId);
+        } else {
+            BreakableWalls.loadMapWalls(db, map, level);
+//            GenerateEnemys.generateEnemy(db, map, level);
+//            GenerateItems.generateItems(map);
+            GeneratePlayer.generatePlayer(db, map, level);
+        }
+
         return map;
     }
 }

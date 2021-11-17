@@ -12,6 +12,7 @@ import org.postgresql.ds.PGSimpleDataSource;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 public class GameDatabaseManager {
     private GameStateDao gameState;
@@ -21,7 +22,7 @@ public class GameDatabaseManager {
     private EnemyDao enemy;
 
 
-    public void setup() throws SQLException {
+    public GameDatabaseManager() throws SQLException {
         DataSource dataSource = connect();
         playerDao = new PlayerDaoJdbc(dataSource);
         gameState = new GameStateDaoJdbc(dataSource);
@@ -72,5 +73,9 @@ public class GameDatabaseManager {
             ItemModel model = new ItemModel(item);
             itemDao.add(model, savedId);
         }
+    }
+
+    public ArrayList<int[]> loadWalls(int saveId) {
+        return wallDao.get(saveId);
     }
 }

@@ -87,8 +87,8 @@ INSERT INTO public.enemy (id, name, save_id, hp, attack, x, y) VALUES (29, 'skel
 INSERT INTO public.enemy (id, name, save_id, hp, attack, x, y) VALUES (30, 'skeleton', 2, 10, 2, 36, 29);
 INSERT INTO public.enemy (id, name, save_id, hp, attack, x, y) VALUES (31, 'spider', 2, 10, 5, 38, 29);
 
-UPDATE public.remowable_walls SET save_id = 1, positions = '23,2 24,2 25,2 26,2 27,2 28,2 29,2 30,2 31,2 32,2 33,2 34,2 35,2 36,2 37,2 38,2 39,2 39,3 39,4 39,5 5,6 6,6 7,6 8,6 9,6 10,6 11,6 12,6 13,6 14,6 15,6 16,6 39,6 39,7 39,8 39,9 39,10 39,12 39,13 39,14 39,15 39,16 39,17 39,18 7,19' WHERE id = 1;
-UPDATE public.remowable_walls SET save_id = 2, positions = '2,2 11,2 38,12 40,19 37,23 35,28' WHERE id = 2;
+INSERT INTO public.remowable_walls (id, save_id, positions) VALUES (1, 1, '23,2 24,2 25,2 26,2 27,2 28,2 29,2 30,2 31,2 32,2 33,2 34,2 35,2 36,2 37,2 38,2 39,2 39,3 39,4 39,5 5,6 6,6 7,6 8,6 9,6 10,6 11,6 12,6 13,6 14,6 15,6 16,6 39,6 39,7 39,8 39,9 39,10 39,12 39,13 39,14 39,15 39,16 39,17 39,18 7,19');
+INSERT INTO public.remowable_walls (id, save_id, positions) VALUES (2, 2, '2,2 11,2 38,12 40,19 37,23 35,28');
 
 ALTER TABLE ONLY public.player
     ADD CONSTRAINT fk_player_id FOREIGN KEY (save_id) REFERENCES public.game_state(id);
