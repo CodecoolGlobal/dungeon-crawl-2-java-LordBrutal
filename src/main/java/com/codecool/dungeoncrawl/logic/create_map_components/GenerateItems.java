@@ -27,16 +27,20 @@ public class GenerateItems {
                 if (cell.getType().equals(CellType.FLOOR) && cell.getActor() == null && cell.getItem() == null) {
                     switch (item) {
                         case "Potion":
-                            new Potion(cell);
+                            Potion potion = new Potion(cell);
+                            map.getItems().add(potion);
                             break;
                         case "PickAxe":
-                            new PickAxe(cell);
+                            PickAxe pickAxe = new PickAxe(cell);
+                            map.getItems().add(pickAxe);
                             break;
                         case "Shield":
-                            new Shield(cell);
+                            Shield shield = new Shield(cell);
+                            map.getItems().add(shield);
                             break;
                         case "Sword":
-                            new Sword(cell);
+                            Sword sword = new Sword(cell);
+                            map.getItems().add(sword);
                             break;
                     }
                     break;
@@ -55,6 +59,7 @@ public class GenerateItems {
                 keyCell = map.getCell(keyWidthPosition, keyHeightPosition);
                 break;
         }
-        new Key(keyCell, Color.BLUE.getColor());
+        Key key = new Key(keyCell, Color.BLUE.getColor());
+        map.getItems().add(key);
     }
 }

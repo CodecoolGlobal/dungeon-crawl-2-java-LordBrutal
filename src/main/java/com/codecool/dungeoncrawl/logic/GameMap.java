@@ -3,6 +3,7 @@ package com.codecool.dungeoncrawl.logic;
 import com.codecool.dungeoncrawl.logic.actors.enemys.Cyclops;
 import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.logic.actors.enemys.Enemy;
+import com.codecool.dungeoncrawl.logic.items.Item;
 
 import java.util.ArrayList;
 
@@ -16,6 +17,7 @@ public class GameMap {
     private Player player;
     private ArrayList<Enemy> enemys = new ArrayList<>();
     private ArrayList<int[]> breakableWalls = new ArrayList<>();
+    private ArrayList<Item> items = new ArrayList<>();
 
     public GameMap(int width, int height, int level, CellType defaultCellType) {
         this.level = level;
@@ -62,6 +64,10 @@ public class GameMap {
             }
         }
         return null;
+    }
+
+    public ArrayList<Item> getItems() {
+        return items;
     }
 
     public ArrayList<Enemy> getEnemys(){

@@ -69,8 +69,13 @@ public class Player extends Actor {
             }
             if (item instanceof Key) {
                 inventory.add(String.format("%s%s key", ((Key) item).getColor().substring(0, 1).toUpperCase(), ((Key) item).getColor().substring(1)));
+                }
             }
             else inventory.add(item.getClass().getSimpleName());
+        for (Item it: this.getCell().getMap().getItems()) {
+            if (it.equals(item)) {
+                this.getCell().getMap().getItems().remove(item);
+            }
             this.getCell().setItem(null);
         }
     }
