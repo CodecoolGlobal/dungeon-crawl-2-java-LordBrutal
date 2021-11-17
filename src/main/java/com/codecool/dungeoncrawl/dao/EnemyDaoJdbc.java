@@ -5,6 +5,7 @@ import com.codecool.dungeoncrawl.model.PlayerModel;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EnemyDaoJdbc implements EnemyDao{
@@ -16,14 +17,13 @@ public class EnemyDaoJdbc implements EnemyDao{
     @Override
     public void add(EnemyModel enemy, int savedId) {
         try (Connection conn = dataSource.getConnection()) {
-            String sql = "INSERT INTO enemy (name, save_id, hp, attack, x, y) VALUES (?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO enemy (name, save_id, hp, x, y) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, enemy.getName());
             statement.setInt(2,savedId);
             statement.setInt(3, enemy.getHp());
-            statement.setInt(4,enemy.getAttack());
-            statement.setInt(5,enemy.getX());
-            statement.setInt(6,enemy.getY());
+            statement.setInt(4,enemy.getX());
+            statement.setInt(5,enemy.getY());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             resultSet.next();
@@ -44,8 +44,22 @@ public class EnemyDaoJdbc implements EnemyDao{
     }
 
     @Override
-    public List<EnemyModel> getAll() {
-        return null;
+    public List<EnemyModel> getAll(int saveId) {
+        try (Connection conn = dataSource.getConnection()) {
+            String sql = "SELECT * FROM enemy WHERE save_id = ?";
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setInt(1, saveId);
+            ResultSet rs = st.executeQuery();
+            List<EnemyModel> result = new ArrayList<>();
+            while (rs.next()) { // while result set pointer is positioned before or on last row read authors
+                EnemyModel enemyModel = new EnemyModel(rs.getString(2),rs.getInt(3), rs.getInt(5), rs.getInt(6));
+                enemyModel.setId(rs.getInt(1));
+                result.add(enemyModel);
+            }
+            return result;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error while reading all authors", e);
+        }
     }
 
 }
