@@ -6,6 +6,9 @@ import com.codecool.dungeoncrawl.logic.actors.enemys.Enemy;
 import com.codecool.dungeoncrawl.logic.items.Item;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class GameMap {
 
@@ -98,8 +101,9 @@ public class GameMap {
     }
 
     public void removeBreakableWall(Cell wallCell) {
-        int x = wallCell.getX();
-        int y = wallCell.getY();
-        breakableWalls.remove(new int[]{x, y});
+        int[] filtered = {wallCell.getX(), wallCell.getY()};
+        breakableWalls = (ArrayList<int[]>) breakableWalls.stream()
+                .filter(w -> !Arrays.equals(Arrays.stream(w).toArray(), filtered))
+                .collect(Collectors.toList());
     }
 }
