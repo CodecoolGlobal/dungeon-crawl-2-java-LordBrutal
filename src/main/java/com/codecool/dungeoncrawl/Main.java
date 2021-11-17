@@ -10,6 +10,7 @@ import com.codecool.dungeoncrawl.logic.actors.enemys.Cyclops;
 import com.codecool.dungeoncrawl.logic.actors.enemys.Spider;
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -17,7 +18,9 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.util.Optional;
@@ -33,6 +36,7 @@ public class Main extends Application {
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
     Button pickUpButton = new Button("Pick up!");
+    Button loadGameButton = new Button("Load Game");
     Label attackLabel = new Label();
     Label defenseLabel = new Label();
     GameDatabaseManager db = new GameDatabaseManager();
@@ -66,6 +70,34 @@ public class Main extends Application {
     private void pickUpItem() {
         map.playerPickUpItem();
         refresh();
+    }
+
+    private void loadGame() {
+        Stage window = new Stage();
+
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setTitle("Load Game");
+        window.setMinWidth(400);
+
+        Label label = new Label();
+        label.setText("Chose Load");
+
+        Button loadStatement1 = new Button("Example to Load button");
+        loadStatement1.setOnAction(e -> System.out.println("This will call the load method"));
+
+        Button closeButton = new Button("Close the window");
+        closeButton.setOnAction(e -> window.close());
+
+        VBox layout = new VBox(10);
+        layout.getChildren().add(label);
+        layout.getChildren().add(loadStatement1);
+        layout.getChildren().add(closeButton);
+
+        layout.setAlignment(Pos.CENTER);
+
+        Scene scene = new Scene(layout);
+        window.setScene(scene);
+        window.showAndWait();
     }
 
     private void onKeyPressed(KeyEvent keyEvent) {
@@ -178,6 +210,8 @@ public class Main extends Application {
         list.setItems(map.getPlayer().getInventory());
         pickUpButton.setFocusTraversable(false);
         pickUpButton.setOnMouseClicked(mouseEvent -> pickUpItem());
+        loadGameButton.setFocusTraversable(false);
+        loadGameButton.setOnMouseClicked(mouseEvent -> loadGame());
         GridPane ui = new GridPane();
         ui.setPrefWidth(400);
         ui.setPadding(new Insets(10));
@@ -188,6 +222,7 @@ public class Main extends Application {
         ui.add(new Label("Defense: "), 0, 2);
         ui.add(defenseLabel, 1,2);
         ui.add(pickUpButton, 0, 5);
+        ui.add(loadGameButton, 0, 6);
         ui.add(new Label("Inventory"), 0, 3);
         ui.add(list, 0, 4);
         return ui;
