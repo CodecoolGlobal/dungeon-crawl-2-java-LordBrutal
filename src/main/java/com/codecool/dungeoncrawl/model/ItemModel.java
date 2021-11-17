@@ -1,6 +1,5 @@
 package com.codecool.dungeoncrawl.model;
 
-import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.items.Item;
 
 public class ItemModel extends BaseModel{

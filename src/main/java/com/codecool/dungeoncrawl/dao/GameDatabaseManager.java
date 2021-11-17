@@ -68,7 +68,7 @@ public class GameDatabaseManager {
     }
 
     private void saveItems (GameMap map, int savedId) {
-        for (Item item : map.getItems()) {
+        for (Item item : map.getItemsList()) {
             ItemModel model = new ItemModel(item);
             itemDao.add(model, savedId);
         }

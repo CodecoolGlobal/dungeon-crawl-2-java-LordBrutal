@@ -6,12 +6,14 @@ import com.codecool.dungeoncrawl.logic.Color;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.items.*;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class GenerateItems {
 
     public static void generateItems(GameMap map) {
 
+        ArrayList<Item> generatedItems = new ArrayList<>();
         int keyWidthPosition;
         int keyHeightPosition;
         Cell keyCell = null;
@@ -28,19 +30,19 @@ public class GenerateItems {
                     switch (item) {
                         case "Potion":
                             Potion potion = new Potion(cell);
-                            map.getItems().add(potion);
+                            generatedItems.add(potion);
                             break;
                         case "PickAxe":
                             PickAxe pickAxe = new PickAxe(cell);
-                            map.getItems().add(pickAxe);
+                            generatedItems.add(pickAxe);
                             break;
                         case "Shield":
                             Shield shield = new Shield(cell);
-                            map.getItems().add(shield);
+                            generatedItems.add(shield);
                             break;
                         case "Sword":
                             Sword sword = new Sword(cell);
-                            map.getItems().add(sword);
+                            generatedItems.add(sword);
                             break;
                     }
                     break;
@@ -60,6 +62,7 @@ public class GenerateItems {
                 break;
         }
         Key key = new Key(keyCell, Color.BLUE.getColor());
-        map.getItems().add(key);
+        generatedItems.add(key);
+        map.setItemsList(generatedItems);
     }
 }

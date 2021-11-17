@@ -64,7 +64,7 @@ public class Main extends Application {
     }
 
     private void pickUpItem() {
-        map.getPlayer().addToInventory();
+        map.playerPickUpItem();
         refresh();
     }
 

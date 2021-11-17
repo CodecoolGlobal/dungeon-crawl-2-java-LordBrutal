@@ -31,6 +31,20 @@ public class GameMap {
         }
     }
 
+    public void playerPickUpItem() {
+        Item grabbedItem = null;
+        for (Item item : items) {
+            if (player.getCell().equals(item.getCell())) {
+                player.addToInventory(item);
+                grabbedItem = item;
+            }
+        }
+        if (grabbedItem!=null) {
+            items.remove(grabbedItem);
+            grabbedItem.getCell().setItem(null);
+        }
+    }
+
     public Cell getCell(int x, int y) {
         return cells[x][y];
     }
@@ -66,8 +80,12 @@ public class GameMap {
         return null;
     }
 
-    public ArrayList<Item> getItems() {
+    public ArrayList<Item> getItemsList() {
         return items;
+    }
+
+    public void setItemsList(ArrayList<Item> items) {
+        this.items = items;
     }
 
     public ArrayList<Enemy> getEnemys(){

@@ -5,6 +5,8 @@ import com.codecool.dungeoncrawl.logic.items.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
+
 public class Player extends Actor {
     private String name;
 
@@ -40,14 +42,13 @@ public class Player extends Actor {
         this.name = newName;
     }
 
-    public void addToInventory() {
-        Item item = this.getCell().getItem();
+    public void addToInventory(Item item) {
         if (item != null) {
             String itemClass = item.getClass().getSimpleName();
             switch (itemClass) {
                 case "Sword":
-                    this.attack += ((Sword)item).getAttackModifier();
-                    if(hasSword) {
+                    this.attack += ((Sword) item).getAttackModifier();
+                    if (hasSword) {
                         setTileName("player with two swords");
                     } else {
                         setTileName("player with sword");
@@ -58,7 +59,7 @@ public class Player extends Actor {
                     defense += ((Shield) item).getDefenseModifier();
                     break;
                 case "Potion":
-                    setHealth(this.getHealth()+((Potion) item).getHealthIncrease());
+                    setHealth(this.getHealth() + ((Potion) item).getHealthIncrease());
                     break;
                 case "PickAxe":
                     hasPickAxe = true;
@@ -69,14 +70,7 @@ public class Player extends Actor {
             }
             if (item instanceof Key) {
                 inventory.add(String.format("%s%s key", ((Key) item).getColor().substring(0, 1).toUpperCase(), ((Key) item).getColor().substring(1)));
-                }
-            }
-            else inventory.add(item.getClass().getSimpleName());
-        for (Item it: this.getCell().getMap().getItems()) {
-            if (it.equals(item)) {
-                this.getCell().getMap().getItems().remove(item);
-            }
-            this.getCell().setItem(null);
+            } else inventory.add(item.getClass().getSimpleName());
         }
     }
 
