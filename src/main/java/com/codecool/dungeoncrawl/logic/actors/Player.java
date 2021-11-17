@@ -14,6 +14,13 @@ public class Player extends Actor {
     private boolean hasKey = false;
     private boolean hasSword = false;
 
+    public void removeKeyAndPickaxe() {
+        this.hasPickAxe = false;
+        this.hasKey = false;
+        inventory.remove("Blue key");
+        inventory.remove("PickAxe");
+    }
+
     public Player(Cell cell) {
         super(cell);
         this.attack = 5;
