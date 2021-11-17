@@ -60,7 +60,7 @@ public class Main extends Application {
         primaryStage.show();
         // for test db saving is working
         db.setup();
-        db.save(map);
+
     }
 
     private void pickUpItem() {
@@ -70,6 +70,11 @@ public class Main extends Application {
 
     private void onKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
+            case S:
+                if (keyEvent.isControlDown()) {
+                    db.save(map);
+                }
+                break;
             case UP:
                 map.getPlayer().move(0, -1);
                 makeEnemyMove();
