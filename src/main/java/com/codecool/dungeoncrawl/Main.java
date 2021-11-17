@@ -78,28 +78,22 @@ public class Main extends Application {
             case UP:
                 map.getPlayer().move(0, -1);
                 makeEnemyMove();
-                checkLevelWin();
-                refresh();
                 break;
             case DOWN:
                 map.getPlayer().move(0, 1);
                 makeEnemyMove();
-                checkLevelWin();
-                refresh();
                 break;
             case LEFT:
                 map.getPlayer().move(-1, 0);
                 makeEnemyMove();
-                checkLevelWin();
-                refresh();
                 break;
             case RIGHT:
                 map.getPlayer().move(1, 0);
                 makeEnemyMove();
-                checkLevelWin();
-                refresh();
                 break;
         }
+        checkLevelWin();
+        refresh();
     }
 
     private void refresh() {
@@ -173,8 +167,7 @@ public class Main extends Application {
             Cell playerCell = map.getPlayer().getCell();
             oldPlayer.setCell(playerCell);
             map.setPlayer(oldPlayer);
-            map.getPlayer().getInventory().remove("Blue key");
-            map.getPlayer().getInventory().remove("PickAxe");
+            map.getPlayer().removeKeyAndPickaxe();
             list.setItems(map.getPlayer().getInventory());
 
         }

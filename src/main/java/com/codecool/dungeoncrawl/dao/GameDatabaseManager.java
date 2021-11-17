@@ -2,6 +2,7 @@ package com.codecool.dungeoncrawl.dao;
 
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.items.Item;
+import com.codecool.dungeoncrawl.model.EnemyModel;
 import com.codecool.dungeoncrawl.model.GameState;
 import com.codecool.dungeoncrawl.model.ItemModel;
 import com.codecool.dungeoncrawl.model.PlayerModel;
@@ -17,6 +18,8 @@ public class GameDatabaseManager {
     private PlayerDao playerDao;
     private BreakableWallDao wallDao;
     private ItemDao itemDao;
+    private EnemyDao enemy;
+
 
     public void setup() throws SQLException {
         DataSource dataSource = connect();
@@ -24,11 +27,12 @@ public class GameDatabaseManager {
         gameState = new GameStateDaoJdbc(dataSource);
         wallDao = new BreakableWallDaoJdbc(dataSource);
         itemDao = new ItemDaoJdbc(dataSource);
+        enemy = new EnemyDaoJdbc(dataSource);
     }
 
     public void save(GameMap map) {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        GameState GameStateModel = new GameState("map1.txt", timestamp);
+        GameState GameStateModel = new GameState(map.getLevel(), timestamp);
         gameState.add(GameStateModel);
         int saveId = GameStateModel.getId();
         PlayerModel model = new PlayerModel(map.getPlayer());
@@ -36,6 +40,14 @@ public class GameDatabaseManager {
         WallModel walls = new WallModel(map);
         wallDao.add(walls, saveId);
         saveItems(map, saveId);
+        saveEnemys(map,saveId);
+    }
+
+    public void saveEnemys(GameMap map, int savedId){
+        for (int i = 0; i < map.getEnemys().size(); i++) {
+            EnemyModel enemyMonster = new EnemyModel(map.getEnemys().get(i));
+            enemy.add(enemyMonster, savedId);
+        }
 
     }
 
