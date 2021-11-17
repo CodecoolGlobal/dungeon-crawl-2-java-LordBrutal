@@ -70,9 +70,9 @@ public class MapLoader {
 //            GeneratePlayer.generatePlayer(db, map, saveId);
         } else {
             BreakableWalls.loadMapWalls(db, map, level);
-//            GenerateEnemys.generateEnemy(db, map, level);
-//            GenerateItems.generateItems(map);
-            GeneratePlayer.generatePlayer(db, map, level);
+            GenerateEnemys.generateEnemy(db, map, level);
+            GenerateItems.generateItems(map);
+            GeneratePlayer.generatePlayer(db, map);
         }
 
         return map;

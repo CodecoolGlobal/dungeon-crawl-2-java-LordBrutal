@@ -78,4 +78,8 @@ public class GameDatabaseManager {
     public ArrayList<int[]> loadWalls(int saveId) {
         return wallDao.get(saveId);
     }
+
+    public PlayerModel loadPlayer(int saveId) {
+        return playerDao.get(saveId);
+    }
 }

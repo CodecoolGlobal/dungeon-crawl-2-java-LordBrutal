@@ -1,21 +1,19 @@
 package com.codecool.dungeoncrawl.logic.create_map_components;
 
+import com.codecool.dungeoncrawl.dao.GameDatabaseManager;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.actors.Player;
+import com.codecool.dungeoncrawl.model.PlayerModel;
 
 
 public class GeneratePlayer {
 
-    public static void generatePlayer(GameMap gameMap) {
+    public static void generatePlayer(GameDatabaseManager db,GameMap gameMap) {
         int level = gameMap.getLevel();
 
-        switch (level) {
-            case 1:
-                gameMap.setPlayer(new Player(gameMap.getCell(17, 11)));
-                break;
-            case 2:
-                gameMap.setPlayer(new Player(gameMap.getCell(26, 27)));
-                break;
+        if (level == 1) {
+            PlayerModel player = db.loadPlayer(level);
+            gameMap.setPlayer(new Player(gameMap.getCell(player.getX(), player.getY())));
         }
     }
 }
