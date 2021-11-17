@@ -59,7 +59,7 @@ public class MapLoader {
                 }
             }
         }
-        BreakableWalls.loadMapWalls(map,level);
+        BreakableWalls.loadMapWalls(map);
         GenerateEnemys.generateEnemy(map);
         GenerateItems.generateItems(map);
         GeneratePlayer.generatePlayer(map);

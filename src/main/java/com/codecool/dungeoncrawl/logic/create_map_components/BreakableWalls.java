@@ -15,12 +15,12 @@ public class BreakableWalls {
     private static int[][] level2Walls = new int[][]
             {{2, 2}, {11,2}, {38,12}, {40,19}, {37,23}, {35,28}};
 
-    public static void loadMapWalls(GameMap map, int level) {
+    public static void loadMapWalls(GameMap map) {
         int[][] walls = new int[0][];
-        if(level == 1) {
+        if(map.getLevel() == 1) {
             walls = level1Walls;
 //            int[][] level1Walls = {{23,2}}; // read database here if loading
-        } else if (level == 2) {
+        } else if (map.getLevel() == 2) {
             walls = level2Walls;
         }
         for(int[] coords: walls) {
