@@ -5,6 +5,15 @@ CREATE TABLE public.game_state (
     saved_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
+DROP TABLE IF EXISTS public.item CASCADE;
+CREATE TABLE public.item (
+    id serial NOT NULL PRIMARY KEY,
+    save_id integer NOT NULL,
+    item_tile_name text NOT NULL,
+    width_position integer NOT NULL,
+    height_position integer NOT NULL
+);
+
 DROP TABLE IF EXISTS public.player CASCADE;
 CREATE TABLE public.player (
     id serial NOT NULL PRIMARY KEY,
@@ -70,3 +79,6 @@ ALTER TABLE ONLY public.skeleton
 
 ALTER TABLE ONLY public.remowable_walls
     ADD CONSTRAINT fk_remowable_walls_save_id FOREIGN KEY (save_id) REFERENCES public.game_state(id);
+
+ALTER TABLE ONLY public.item
+    ADD CONSTRAINT fk_item_save_id FOREIGN KEY (save_id) REFERENCES public.game_state(id);
