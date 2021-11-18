@@ -50,7 +50,7 @@ public class PlayerDaoJdbc implements PlayerDao {
             if (!rs.next()) {
                 return null;
             }
-            return new PlayerModel(rs.getString(3),rs.getInt(4),rs.getInt(5),rs.getInt(6), rs.getInt(7), rs.getInt(9));
+            return new PlayerModel(rs.getString(3),rs.getInt(4),rs.getInt(5),rs.getInt(6), rs.getInt(7),rs.getString(8),rs.getInt(9));
         } catch (SQLException e) {
             throw new RuntimeException("Error while reading author with id: " + id, e);
         }

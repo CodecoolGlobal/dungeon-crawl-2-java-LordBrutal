@@ -75,6 +75,10 @@ public class Player extends Actor {
         return inventory;
     }
 
+    public void setInventory(String[] items) {
+        this.inventory.addAll(items);
+    }
+
     public boolean getHasPickAxe() {
         return hasPickAxe;
     }
@@ -89,9 +93,27 @@ public class Player extends Actor {
 
     public String getItems() {
         StringBuilder itemList = new StringBuilder();
+        String separator = "";
         for(String item : inventory) {
-            itemList.append(item).append(" ");
+            itemList.append(separator).append(item);
+            separator = ",";
         }
         return itemList.toString().strip();
+    }
+
+    public void setHasPickAxe(boolean hasPickAxe) {
+        this.hasPickAxe = hasPickAxe;
+    }
+
+    public void setHasKey(boolean hasKey) {
+        this.hasKey = hasKey;
+    }
+
+    public void setHasSword(boolean hasSword) {
+        this.hasSword = hasSword;
+    }
+
+    public void setDefense(int defense) {
+        this.defense = defense;
     }
 }

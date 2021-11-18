@@ -7,10 +7,28 @@ import com.codecool.dungeoncrawl.model.PlayerModel;
 
 public class GeneratePlayer {
 
-    public static void generatePlayer(PlayerModel player, GameMap gameMap) {
-            gameMap.setPlayer(new Player(gameMap.getCell(player.getX(), player.getY())));
-            gameMap.getPlayer().setAttack(player.getAttack());
-
-
+    public static void generatePlayer(PlayerModel playerModel, GameMap gameMap) {
+        Player player = new Player(gameMap.getCell(playerModel.getX(), playerModel.getY()));
+        gameMap.setPlayer(player);
+        player.setAttack(playerModel.getAttack());
+        player.setDefense(playerModel.getDef());
+        String items = playerModel.getItems();
+        player.setTileName(playerModel.getPlayerName());
+        if(items != null) {
+            for(String item: items.split(",")) {
+                switch (item) {
+                    case "Sword":
+                        player.setHasSword(true);
+                        break;
+                    case "PickAxe":
+                        player.setHasPickAxe(true);
+                        break;
+                    case "Key":
+                        player.setHasKey(true);
+                        break;
+                }
+            }
+            player.setInventory(items.split(","));
+        }
     }
 }
