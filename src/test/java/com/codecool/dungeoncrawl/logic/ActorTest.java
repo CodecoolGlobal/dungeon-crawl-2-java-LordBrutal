@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ActorTest {
+public class ActorTest {
     GameMap gameMap = new GameMap(3, 3, 1, CellType.FLOOR);
 
     @Test
@@ -16,7 +16,7 @@ class ActorTest {
 
         assertEquals(2, player.getX());
         assertEquals(1, player.getY());
-        assertEquals(null, gameMap.getCell(1, 1).getActor());
+        assertNull(gameMap.getCell(1, 1).getActor());
         assertEquals(player, gameMap.getCell(2, 1).getActor());
     }
 
@@ -32,23 +32,35 @@ class ActorTest {
 
     @Test
     void cannotMoveOutOfMap() {
-        Player player = new Player(gameMap.getCell(2, 1));
+        Player player = new Player(gameMap.getCell(1, 1));
+        gameMap.getCell(2, 1).setType(CellType.WALL);
+        System.out.println(gameMap.getCell(2, 1).getType());
+
+
         player.move(1, 0);
 
-        assertEquals(2, player.getX());
-        assertEquals(1, player.getY());
+        int expectedX = 1;
+        int expectedY = 1;
+
+        assertEquals(expectedX, player.getX());
+        assertEquals(expectedY, player.getY());
     }
 
     @Test
     void cannotMoveIntoAnotherActor() {
         Player player = new Player(gameMap.getCell(1, 1));
+        gameMap.setPlayer(player);
         Skeleton skeleton = new Skeleton(gameMap.getCell(2, 1));
+        gameMap.setEnemys(skeleton);
         player.move(1, 0);
+        int expectedPlayerX = 1;
+        int expectedPlayerY = 1;
 
-        assertEquals(1, player.getX());
-        assertEquals(1, player.getY());
-        assertEquals(2, skeleton.getX());
-        assertEquals(1, skeleton.getY());
+        int expectedEnemyX = 2;
+        int expectedEnemyY = 1;
+
+        assertTrue(player.getX() == expectedPlayerX && player.getY() == expectedPlayerY);
+        assertTrue(skeleton.getX() == expectedEnemyX && skeleton.getY() == expectedEnemyY);
         assertEquals(skeleton, gameMap.getCell(2, 1).getActor());
     }
 }
