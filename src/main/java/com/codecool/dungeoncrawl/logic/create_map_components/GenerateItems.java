@@ -5,8 +5,10 @@ import com.codecool.dungeoncrawl.logic.CellType;
 import com.codecool.dungeoncrawl.logic.Color;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.items.*;
+import com.codecool.dungeoncrawl.model.ItemModel;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class GenerateItems {
@@ -63,6 +65,34 @@ public class GenerateItems {
         }
         Key key = new Key(keyCell, Color.BLUE.getColor());
         generatedItems.add(key);
+        map.setItemsList(generatedItems);
+    }
+
+    public static void loadItems(List<ItemModel> itemModels, GameMap map) {
+        ArrayList<Item> generatedItems = new ArrayList<>();
+        for(ItemModel itemModel: itemModels) {
+            int h = itemModel.getHeightPos();
+            int w = itemModel.getWidthPos();
+            Cell cell = map.getCell(w, h);
+
+            switch (itemModel.getName()) {
+                case "potion":
+                    generatedItems.add(new Potion(cell));
+                    break;
+                case "pickaxe":
+                    generatedItems.add(new PickAxe(cell));
+                    break;
+                case "shield":
+                    generatedItems.add(new Shield(cell));
+                    break;
+                case "sword":
+                    generatedItems.add(new Sword(cell));
+                    break;
+                case "blue key":
+                    generatedItems.add(new Key(cell, Color.BLUE.getColor()));
+                    break;
+            }
+        }
         map.setItemsList(generatedItems);
     }
 }
