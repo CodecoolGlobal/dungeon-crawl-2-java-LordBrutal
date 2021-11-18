@@ -26,15 +26,14 @@ public class PlayerTest {
 
     @Test
     public void testInventoryAddingNull() {
-        player.addToInventory();
+        player.addToInventory(null);
         String expected = "[]";
         assertEquals(expected, player.getInventory().toString());
     }
 
     @Test
     public void testInventoryContainsPickedUpItem() {
-        gameMap.getCell(2, 2).setItem(new Sword(gameMap.getCell(2,2)));
-        player.addToInventory();
+        player.addToInventory(new Sword(gameMap.getCell(2,2)));
         List<String> expected = new ArrayList<>() {};
 
         ObservableList<String> actual = player.getInventory();
@@ -45,10 +44,8 @@ public class PlayerTest {
 
     @Test
     public void testGetItemsReturnsSimple() {
-        gameMap.getCell(2, 2).setItem(new Sword(gameMap.getCell(2,2)));
-        player.addToInventory();
-        gameMap.getCell(2, 2).setItem(new PickAxe(gameMap.getCell(2,2)));
-        player.addToInventory();
+        player.addToInventory(new Sword(gameMap.getCell(2,2)));
+        player.addToInventory(new PickAxe(gameMap.getCell(2,2)));
 
         String expected = "Sword PickAxe";
         String actual = player.getItems();
