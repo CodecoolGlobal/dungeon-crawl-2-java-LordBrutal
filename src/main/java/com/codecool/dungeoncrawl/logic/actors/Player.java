@@ -5,8 +5,6 @@ import com.codecool.dungeoncrawl.logic.items.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
-
 public class Player extends Actor {
     private String name;
 

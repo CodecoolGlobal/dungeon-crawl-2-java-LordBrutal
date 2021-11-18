@@ -2,13 +2,8 @@ package com.codecool.dungeoncrawl.logic;
 
 import com.codecool.dungeoncrawl.dao.GameDatabaseManager;
 import com.codecool.dungeoncrawl.logic.actors.Player;
-import com.codecool.dungeoncrawl.logic.create_map_components.BreakableWalls;
-import com.codecool.dungeoncrawl.logic.create_map_components.GenerateEnemys;
-import com.codecool.dungeoncrawl.logic.create_map_components.GenerateItems;
-import com.codecool.dungeoncrawl.logic.create_map_components.GeneratePlayer;
 
 import java.io.InputStream;
-import java.sql.SQLException;
 import java.util.Scanner;
 
 public class MapLoader {

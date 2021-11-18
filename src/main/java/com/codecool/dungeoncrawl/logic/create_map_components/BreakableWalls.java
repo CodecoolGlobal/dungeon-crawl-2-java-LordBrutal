@@ -1,6 +1,5 @@
 package com.codecool.dungeoncrawl.logic.create_map_components;
 
-import com.codecool.dungeoncrawl.dao.GameDatabaseManager;
 import com.codecool.dungeoncrawl.logic.CellType;
 import com.codecool.dungeoncrawl.logic.GameMap;
 

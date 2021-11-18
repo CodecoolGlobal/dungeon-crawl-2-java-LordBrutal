@@ -5,8 +5,6 @@ import com.codecool.dungeoncrawl.utils.Util;
 
 import java.util.ArrayList;
 
-import static java.util.Arrays.asList;
-
 public class Spider extends Enemy{
     private ArrayList<int[]> movements = new ArrayList<>();
 

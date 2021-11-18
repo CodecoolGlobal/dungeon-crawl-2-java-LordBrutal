@@ -3,7 +3,6 @@ package com.codecool.dungeoncrawl.logic.actors;
 import com.codecool.dungeoncrawl.logic.*;
 import com.codecool.dungeoncrawl.logic.actors.enemys.Cyclops;
 import com.codecool.dungeoncrawl.logic.actors.enemys.Enemy;
-import com.codecool.dungeoncrawl.logic.create_map_components.BreakableWalls;
 
 import java.util.Objects;
 

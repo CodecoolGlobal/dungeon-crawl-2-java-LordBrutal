@@ -1,7 +1,6 @@
 package com.codecool.dungeoncrawl.dao;
 
 import com.codecool.dungeoncrawl.logic.GameMap;
-import com.codecool.dungeoncrawl.logic.actors.enemys.Enemy;
 import com.codecool.dungeoncrawl.logic.create_map_components.BreakableWalls;
 import com.codecool.dungeoncrawl.logic.create_map_components.GenerateEnemys;
 import com.codecool.dungeoncrawl.logic.create_map_components.GenerateItems;

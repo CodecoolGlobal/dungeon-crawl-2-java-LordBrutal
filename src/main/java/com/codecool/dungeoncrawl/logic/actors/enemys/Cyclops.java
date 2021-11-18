@@ -3,7 +3,6 @@ package com.codecool.dungeoncrawl.logic.actors.enemys;
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.utils.Util;
-import static java.util.Arrays.asList;
 
 import java.util.ArrayList;
 
