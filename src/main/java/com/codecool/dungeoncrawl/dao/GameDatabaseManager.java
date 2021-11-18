@@ -52,7 +52,11 @@ public class GameDatabaseManager {
         BreakableWalls.loadMapWalls(wallDao.get(saveId), map);
         GeneratePlayer.generatePlayer(playerDao.get(saveId), map);
         GenerateEnemys.generateEnemy(enemy.getAll(saveId), map);
-        GenerateItems.generateItems(map);
+        if(saveId > 2) {    // player generated save
+            GenerateItems.loadItems(itemDao.getAll(saveId), map);
+        } else {
+            GenerateItems.generateItems(map);
+        }
     }
      public List<GameState> loadGameStates() {
         return gameState.getAll();
