@@ -7,8 +7,7 @@ import com.codecool.dungeoncrawl.logic.GameMap;
 import java.util.ArrayList;
 
 public class BreakableWalls {
-    public static void loadMapWalls(GameDatabaseManager db, GameMap map, int saveId) {
-        ArrayList<int[]> walls = db.loadWalls(saveId);
+    public static void loadMapWalls(ArrayList<int[]> walls, GameMap map) {
         for(int[] coords: walls) {
             map.getCell(coords[0], coords[1]).setType(CellType.BREAKABLEWALL);
             map.setBreakableWall(coords[0], coords[1]);
