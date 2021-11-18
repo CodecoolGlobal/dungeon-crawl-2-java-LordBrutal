@@ -15,9 +15,8 @@ import java.util.List;
 
 public class GenerateEnemys {
 
-    public static void generateEnemy(GameDatabaseManager db,GameMap gameMap, int saveId){
+    public static void generateEnemy(List<EnemyModel> enemyModelList,GameMap gameMap){
         ArrayList<Enemy> enemysForMap = new ArrayList<>();
-        List<EnemyModel> enemyModelList = db.loadEnemys(saveId);
         for (int i = 0; i < enemyModelList.size(); i++) {
             String enemyName = enemyModelList.get(i).getName();
             int x = enemyModelList.get(i).getX();
