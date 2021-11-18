@@ -5,7 +5,7 @@ import com.codecool.dungeoncrawl.utils.Util;
 
 import java.util.ArrayList;
 
-import static java.util.Arrays.asList;
+
 
 public class Spider extends Enemy{
     private ArrayList<int[]> movements = new ArrayList<>();
@@ -20,8 +20,8 @@ public class Spider extends Enemy{
     }
 
     public int[] nextStep(){
-        ArrayList<int[]> finalsteps = this.removWalls();
-        return finalsteps.get(Util.generateRandomBetween(0,finalsteps.size()-1));
+        ArrayList<int[]> finalSteps = this.removeWalls();
+        return finalSteps.get(Util.generateRandomBetween(0,finalSteps.size()-1));
     }
 
 
