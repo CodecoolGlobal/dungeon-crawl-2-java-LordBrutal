@@ -8,9 +8,10 @@ import com.codecool.dungeoncrawl.logic.MapLoader;
 import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.logic.actors.enemys.Cyclops;
 import com.codecool.dungeoncrawl.logic.actors.enemys.Spider;
+import com.codecool.dungeoncrawl.model.GameState;
 import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -18,18 +19,20 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
+
+import java.util.List;
 import java.util.Optional;
 
 
 public class Main extends Application {
     GameDatabaseManager db = new GameDatabaseManager();
-    GameMap map = MapLoader.loadMap(db, 1, false);
+    GameMap map = MapLoader.loadMap(db, 1, 1);
     BorderPane borderPane;
     GridPane ui;
     Canvas canvas = new Canvas(
@@ -66,8 +69,6 @@ public class Main extends Application {
 
         primaryStage.setTitle("Dungeon Crawl");
         primaryStage.show();
-        // for test db saving is working
-//        db.setup();
 
     }
 
@@ -86,22 +87,37 @@ public class Main extends Application {
         Label label = new Label();
         label.setText("Chose Load");
 
-        Button loadStatement1 = new Button("Example to Load button");
-        loadStatement1.setOnAction(e -> System.out.println("This will call the load method"));
+        List<GameState> saves = db.loadGameStates();
 
-        Button closeButton = new Button("Close the window");
-        closeButton.setOnAction(e -> window.close());
+        String [] arrayData = new String[saves.size()];
+        for (int i = 0; i < saves.size(); i++) {
+            arrayData[i] = saves.get(i).getName();
+        }
 
-        VBox layout = new VBox(10);
-        layout.getChildren().add(label);
-        layout.getChildren().add(loadStatement1);
-        layout.getChildren().add(closeButton);
+        Dialog dialog = new ChoiceDialog(arrayData[0], arrayData);
+        dialog.setTitle("Select load game");
+        dialog.setHeaderText("Select your choice");
 
-        layout.setAlignment(Pos.CENTER);
+        Optional<String> result = dialog.showAndWait();
+        String selected = "cancelled.";
 
-        Scene scene = new Scene(layout);
-        window.setScene(scene);
-        window.showAndWait();
+
+        if (result.isPresent()) {
+
+            selected = result.get();
+            int level = 1;
+            int saveId = 1;
+            for(GameState save :saves) {
+                if(save.getName().equals(selected)) {
+                    level = save.getCurrentMap();
+                    saveId = save.getId();
+                }
+            }
+            startLevel(level, saveId);
+        }
+
+
+
     }
 
     private void onKeyPressed(KeyEvent keyEvent) {
@@ -175,7 +191,7 @@ public class Main extends Application {
             alert.setHeaderText("You have died!");
             Optional<ButtonType> result = alert.showAndWait();
             if ((result.isPresent()) && (result.get() == ButtonType.OK)) {
-                startLevel(1);
+                startLevel(1, 1);
             } else {
                 System.exit(0);
             }
@@ -199,7 +215,7 @@ public class Main extends Application {
         int x = map.getPlayer().getX();
         int y = map.getPlayer().getY();
         if(map.getCell(x, y).getType().equals(CellType.DOOR)) {
-            startLevel(2);
+            startLevel(2, 2);
             Cell playerCell = map.getPlayer().getCell();
             oldPlayer.setCell(playerCell);
             map.setPlayer(oldPlayer);
@@ -232,8 +248,9 @@ public class Main extends Application {
         return ui;
     }
 
-    private void startLevel(int level) {
-        map = MapLoader.loadMap(db ,level, false);
+    private void startLevel(int level, int saveId) {
+
+        map = MapLoader.loadMap(db ,level, saveId);
         canvas = new Canvas(
                 Math.min(map.getWidth(), 35) * Tiles.TILE_WIDTH,
                 Math.min(map.getHeight(), 22) * Tiles.TILE_WIDTH);

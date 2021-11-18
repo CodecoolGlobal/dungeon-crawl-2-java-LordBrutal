@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class MapLoader {
-    public static GameMap loadMap(GameDatabaseManager db, int level, boolean isLoading) {
+    public static GameMap loadMap(GameDatabaseManager db, int level, int saveId) {
 
         InputStream is = MapLoader.class.getResourceAsStream("/map" + level + ".txt");
         assert is != null;
@@ -62,18 +62,8 @@ public class MapLoader {
                 }
             }
         }
-        int saveId = 1;
-        if(isLoading) {
-//            BreakableWalls.loadMapWalls(db, map, saveId);
-//            GenerateEnemys.generateEnemy(db, map, saveId);
-//            GenerateItems.generateItems(db, map, saveId); //load items
-//            GeneratePlayer.generatePlayer(db, map, saveId);
-        } else {
-            BreakableWalls.loadMapWalls(db, map, level);
-            GenerateEnemys.generateEnemy(db, map, level);
-            GenerateItems.generateItems(map);
-            GeneratePlayer.generatePlayer(db, map);
-        }
+
+            db.load(saveId, map);
 
         return map;
     }

@@ -8,10 +8,10 @@ import com.codecool.dungeoncrawl.model.PlayerModel;
 
 public class GeneratePlayer {
 
-    public static void generatePlayer(GameDatabaseManager db,GameMap gameMap) {
-        int level = gameMap.getLevel();
-        PlayerModel player = db.loadPlayer(level);
-        gameMap.setPlayer(new Player(gameMap.getCell(player.getX(), player.getY())));
-        gameMap.getPlayer().setAttack(player.getAttack());
+    public static void generatePlayer(PlayerModel player, GameMap gameMap) {
+            gameMap.setPlayer(new Player(gameMap.getCell(player.getX(), player.getY())));
+            gameMap.getPlayer().setAttack(player.getAttack());
+
+
     }
 }
