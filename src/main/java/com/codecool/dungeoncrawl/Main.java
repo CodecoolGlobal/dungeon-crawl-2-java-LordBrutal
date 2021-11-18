@@ -23,11 +23,13 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
 import java.util.Optional;
 
 
 public class Main extends Application {
-    GameMap map = MapLoader.loadMap(1);
+    GameDatabaseManager db = new GameDatabaseManager();
+    GameMap map = MapLoader.loadMap(db, 1, false);
     BorderPane borderPane;
     GridPane ui;
     Canvas canvas = new Canvas(
@@ -39,8 +41,10 @@ public class Main extends Application {
     Button loadGameButton = new Button("Load Game");
     Label attackLabel = new Label();
     Label defenseLabel = new Label();
-    GameDatabaseManager db = new GameDatabaseManager();
     ListView<String> list = new ListView<>();
+
+    public Main() throws SQLException {
+    }
 
     public static void main(String[] args) {
         launch(args);
@@ -63,7 +67,7 @@ public class Main extends Application {
         primaryStage.setTitle("Dungeon Crawl");
         primaryStage.show();
         // for test db saving is working
-        db.setup();
+//        db.setup();
 
     }
 
@@ -229,7 +233,7 @@ public class Main extends Application {
     }
 
     private void startLevel(int level) {
-        map = MapLoader.loadMap(level);
+        map = MapLoader.loadMap(db ,level, false);
         canvas = new Canvas(
                 Math.min(map.getWidth(), 35) * Tiles.TILE_WIDTH,
                 Math.min(map.getHeight(), 22) * Tiles.TILE_WIDTH);

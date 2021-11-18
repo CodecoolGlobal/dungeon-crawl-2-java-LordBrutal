@@ -16,16 +16,16 @@ public class PlayerDaoJdbc implements PlayerDao {
     @Override
     public void add(PlayerModel player, int savedId) {
         try (Connection conn = dataSource.getConnection()) {
-            String sql = "INSERT INTO player (player_tile_name,save_id, saved_name, hp, def,  x, y, items) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO player (player_tile_name,save_id, hp, def,  x, y, items, attack) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, player.getPlayerName());
             statement.setInt(2, savedId);
-            statement.setString(3, "tz");
-            statement.setInt(4, player.getHp());
-            statement.setInt(5, player.getDef());
-            statement.setInt(6, player.getX());
-            statement.setInt(7, player.getY());
-            statement.setString(8, player.getItems());
+            statement.setInt(3, player.getHp());
+            statement.setInt(4, player.getDef());
+            statement.setInt(5, player.getX());
+            statement.setInt(6, player.getY());
+            statement.setString(7, player.getItems());
+            statement.setInt(8, player.getAttack());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             resultSet.next();
@@ -42,7 +42,18 @@ public class PlayerDaoJdbc implements PlayerDao {
 
     @Override
     public PlayerModel get(int id) {
-        return null;
+        try (Connection conn = dataSource.getConnection()) {
+            String sql = "SELECT * FROM player WHERE save_id = ?";
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            if (!rs.next()) {
+                return null;
+            }
+            return new PlayerModel(rs.getString(3),rs.getInt(4),rs.getInt(5),rs.getInt(6), rs.getInt(7), rs.getInt(9));
+        } catch (SQLException e) {
+            throw new RuntimeException("Error while reading author with id: " + id, e);
+        }
     }
 
     @Override
