@@ -54,7 +54,7 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         ui = addUi();
 
         borderPane = new BorderPane();
@@ -204,7 +204,7 @@ public class Main extends Application {
                 int[] nextStepSpider = ((Spider) map.getEnemys().get(i)).nextStep();
                 map.getEnemys().get(i).move(nextStepSpider[0],nextStepSpider[1]);
             }else if(map.getEnemys().get(i) instanceof Cyclops){
-                int[] calculateNextStep = ((Cyclops) map.getEnemys().get(i)).nextStepCyclop();
+                int[] calculateNextStep = ((Cyclops) map.getEnemys().get(i)).nextStepCyclops();
                 map.getEnemys().get(i).move(calculateNextStep[0], calculateNextStep[1]);
             }
         }

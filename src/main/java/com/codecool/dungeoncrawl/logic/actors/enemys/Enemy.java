@@ -4,6 +4,7 @@ import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.actors.Actor;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static java.util.Arrays.asList;
 
@@ -13,16 +14,16 @@ public abstract class Enemy extends Actor {
         super.attack = 5;
     }
 
-    public ArrayList<int[]> removWalls(){
+    public ArrayList<int[]> removeWalls(){
         Cell newCell = super.getCell();
-        ArrayList<int[]> finalsteps = new ArrayList<>();
+        ArrayList<int[]> finalSteps = new ArrayList<>();
         ArrayList<int[]> movements = new ArrayList<>(asList(new int[]{0,-1}, new int[]{-1,0}, new int[]{0,1}, new int[]{1,0}));
-        for (int i = 0; i < movements.size(); i++) {
-            if (!(newCell.getNeighbor(movements.get(i)[0], movements.get(i)[1]).getTileName() == "wall")) {
-                finalsteps.add(movements.get(i));
+        for (int[] movement : movements) {
+            if (!(Objects.equals(newCell.getNeighbor(movement[0], movement[1]).getTileName(), "wall"))) {
+                finalSteps.add(movement);
             }
         }
-        return finalsteps;
+        return finalSteps;
     }
 
     @Override

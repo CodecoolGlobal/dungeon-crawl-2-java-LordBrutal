@@ -18,8 +18,8 @@ public class Spider extends Enemy{
     }
 
     public int[] nextStep(){
-        ArrayList<int[]> finalsteps = this.removWalls();
-        return finalsteps.get(Util.generateRandomBetween(0,finalsteps.size()-1));
+        ArrayList<int[]> finalSteps = this.removeWalls();
+        return finalSteps.get(Util.generateRandomBetween(0,finalSteps.size()-1));
     }
 
 
