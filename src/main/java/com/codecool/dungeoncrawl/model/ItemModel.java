@@ -8,6 +8,12 @@ public class ItemModel extends BaseModel{
     private final int widthPos;
     private final int heightPos;
 
+    public ItemModel (String name, int widthPos, int heightPos) {
+        this.name = name;
+        this.widthPos = widthPos;
+        this.heightPos = heightPos;
+    }
+
     public ItemModel (Item item) {
         name = item.getTileName();
         widthPos = item.getCell().getX();
