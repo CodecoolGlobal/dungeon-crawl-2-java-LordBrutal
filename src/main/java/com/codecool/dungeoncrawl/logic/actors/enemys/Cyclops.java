@@ -3,9 +3,9 @@ package com.codecool.dungeoncrawl.logic.actors.enemys;
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.utils.Util;
-import static java.util.Arrays.asList;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Cyclops extends Enemy{
     public Cyclops(Cell cell) {
@@ -42,18 +42,18 @@ public class Cyclops extends Enemy{
         return new int[]{0,1};
     }
 
-    private int[] dodgewall(){
-        int[] basicposi = generatePosition();
-        Cell newcell = super.getCell();
-        if(newcell.getNeighbor(basicposi[0],basicposi[1]).getTileName() == "wall"){
-            ArrayList<int[]> finalsteps = this.removWalls();
-            return finalsteps.get(Util.generateRandomBetween(0,finalsteps.size()-1));
+    private int[] dodgeWall(){
+        int[] basicPosition = generatePosition();
+        Cell newCell = super.getCell();
+        if(Objects.equals(newCell.getNeighbor(basicPosition[0], basicPosition[1]).getTileName(), "wall")){
+            ArrayList<int[]> finalSteps = this.removWalls();
+            return finalSteps.get(Util.generateRandomBetween(0,finalSteps.size()-1));
         }
-        return basicposi;
+        return basicPosition;
     }
 
-    public int[] nextStepCyclop(){
-        return dodgewall();
+    public int[] nextStepCyclops(){
+        return dodgeWall();
     }
 
 
