@@ -36,10 +36,10 @@ public class GameDatabaseManager {
         enemy = new EnemyDaoJdbc(dataSource);
     }
 
-    public void save(GameMap map) {
+    public void save(GameMap map, String name) {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        GameState GameStateModel = new GameState(map.getLevel(), timestamp, "randomname");
-        gameState.add(GameStateModel, "testSave");
+        GameState GameStateModel = new GameState(map.getLevel(), timestamp, name);
+        gameState.add(GameStateModel, name);
         int saveId = GameStateModel.getId();
         PlayerModel model = new PlayerModel(map.getPlayer());
         playerDao.add(model, saveId);

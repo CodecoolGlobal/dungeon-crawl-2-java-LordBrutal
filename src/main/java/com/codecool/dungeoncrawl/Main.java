@@ -124,7 +124,11 @@ public class Main extends Application {
         switch (keyEvent.getCode()) {
             case S:
                 if (keyEvent.isControlDown()) {
-                    db.save(map);
+                    String savedName = getUserInputSaveName();
+                    if (savedName.equals("")){
+                        break;
+                    }
+                    db.save(map, savedName);
                 }
                 break;
             case UP:
@@ -262,5 +266,19 @@ public class Main extends Application {
         ui = addUi();
         borderPane.setRight(ui);
         refresh();
+    }
+    private String getUserInputSaveName(){
+        Dialog dialog = new TextInputDialog("");
+        dialog.setTitle("Save Game");
+        dialog.setHeaderText("Please enter the save name");
+
+        Optional<String> result = dialog.showAndWait();
+        String entered = "none.";
+
+        if (result.isPresent()) {
+            entered = result.get();
+            return entered;
+        }
+        return "";
     }
 }
