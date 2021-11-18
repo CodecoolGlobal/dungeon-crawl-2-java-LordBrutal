@@ -2,10 +2,11 @@ package com.codecool.dungeoncrawl.logic.actor_test.enemies;
 
 import com.codecool.dungeoncrawl.logic.CellType;
 import com.codecool.dungeoncrawl.logic.GameMap;
-import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.logic.actors.enemys.Cyclops;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CyclopsTest {
     Cyclops cyclops;
@@ -18,7 +19,11 @@ public class CyclopsTest {
     }
 
     @Test
-    void getPlayerPositionReturnsActualPosition() {
-        Player player = new Player(gameMap.getCell(3, 3));
+    void getTileName() {
+        String expected = "cyclops";
+        String actual = cyclops.getTileName();
+
+        assertEquals(expected, actual);
     }
+
 }
