@@ -14,7 +14,7 @@ public class GeneratePlayer {
         player.setDefense(playerModel.getDef());
         String items = playerModel.getItems();
         player.setTileName(playerModel.getPlayerName());
-        if(items != null) {
+        if(!items.equals("")) {
             for(String item: items.split(",")) {
                 switch (item) {
                     case "Sword":
