@@ -1,7 +1,10 @@
 package com.codecool.dungeoncrawl.dao;
 
 import com.codecool.dungeoncrawl.logic.GameMap;
-import com.codecool.dungeoncrawl.logic.actors.enemys.Enemy;
+import com.codecool.dungeoncrawl.logic.create_map_components.BreakableWalls;
+import com.codecool.dungeoncrawl.logic.create_map_components.GenerateEnemys;
+import com.codecool.dungeoncrawl.logic.create_map_components.GenerateItems;
+import com.codecool.dungeoncrawl.logic.create_map_components.GeneratePlayer;
 import com.codecool.dungeoncrawl.logic.items.Item;
 import com.codecool.dungeoncrawl.model.EnemyModel;
 import com.codecool.dungeoncrawl.model.GameState;
@@ -35,7 +38,7 @@ public class GameDatabaseManager {
 
     public void save(GameMap map) {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        GameState GameStateModel = new GameState(map.getLevel(), timestamp);
+        GameState GameStateModel = new GameState(map.getLevel(), timestamp, "randomname");
         gameState.add(GameStateModel, "testSave");
         int saveId = GameStateModel.getId();
         PlayerModel model = new PlayerModel(map.getPlayer());
@@ -45,6 +48,15 @@ public class GameDatabaseManager {
         saveItems(map, saveId);
         saveEnemys(map,saveId);
     }
+    public void load(int saveId, GameMap map) {
+        BreakableWalls.loadMapWalls(wallDao.get(saveId), map);
+        GeneratePlayer.generatePlayer(playerDao.get(saveId), map);
+        GenerateEnemys.generateEnemy(enemy.getAll(saveId), map);
+        GenerateItems.generateItems(map);
+    }
+     public List<GameState> loadGameStates() {
+        return gameState.getAll();
+     }
 
     public void saveEnemys(GameMap map, int savedId){
         for (int i = 0; i < map.getEnemys().size(); i++) {
@@ -55,6 +67,7 @@ public class GameDatabaseManager {
         }
 
     }
+
 
     private DataSource connect() throws SQLException {
         PGSimpleDataSource dataSource = new PGSimpleDataSource();
