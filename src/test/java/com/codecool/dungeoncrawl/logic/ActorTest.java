@@ -34,7 +34,6 @@ public class ActorTest {
     void cannotMoveOutOfMap() {
         Player player = new Player(gameMap.getCell(1, 1));
         gameMap.getCell(2, 1).setType(CellType.WALL);
-        System.out.println(gameMap.getCell(2, 1).getType());
 
 
         player.move(1, 0);

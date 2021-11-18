@@ -10,11 +10,8 @@ public class GeneratePlayer {
 
     public static void generatePlayer(GameDatabaseManager db,GameMap gameMap) {
         int level = gameMap.getLevel();
-
-        if (level == 1) {
-            PlayerModel player = db.loadPlayer(level);
-            gameMap.setPlayer(new Player(gameMap.getCell(player.getX(), player.getY())));
-            gameMap.getPlayer().setAttack(player.getAttack());
-        }
+        PlayerModel player = db.loadPlayer(level);
+        gameMap.setPlayer(new Player(gameMap.getCell(player.getX(), player.getY())));
+        gameMap.getPlayer().setAttack(player.getAttack());
     }
 }
