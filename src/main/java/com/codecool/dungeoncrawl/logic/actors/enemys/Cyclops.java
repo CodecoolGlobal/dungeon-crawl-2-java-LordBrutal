@@ -31,12 +31,12 @@ public class Cyclops extends Enemy{
 
     private int[] generatePosition(){
         int[] playerPosition = getPlayerPosition();
-        int[] cyclopsPosi = getCyclopsPosition();
-        if (playerPosition[1] < cyclopsPosi[1]){
+        int[] cyclopsPosition = getCyclopsPosition();
+        if (playerPosition[1] < cyclopsPosition[1]){
             return new int[]{-1,0};
-        }if (playerPosition[1] > cyclopsPosi[1]){
+        }if (playerPosition[1] > cyclopsPosition[1]){
             return new int[]{1,0};
-        }if (playerPosition[0] < cyclopsPosi[0]){
+        }if (playerPosition[0] < cyclopsPosition[0]){
             return new int[]{0,-1};
         }
         return new int[]{0,1};
@@ -46,7 +46,7 @@ public class Cyclops extends Enemy{
         int[] basicPosition = generatePosition();
         Cell newCell = super.getCell();
         if(Objects.equals(newCell.getNeighbor(basicPosition[0], basicPosition[1]).getTileName(), "wall")){
-            ArrayList<int[]> finalSteps = this.removWalls();
+            ArrayList<int[]> finalSteps = this.removeWalls();
             return finalSteps.get(Util.generateRandomBetween(0,finalSteps.size()-1));
         }
         return basicPosition;
