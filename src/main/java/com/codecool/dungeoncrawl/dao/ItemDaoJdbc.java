@@ -1,9 +1,11 @@
 package com.codecool.dungeoncrawl.dao;
 
+import com.codecool.dungeoncrawl.model.EnemyModel;
 import com.codecool.dungeoncrawl.model.ItemModel;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ItemDaoJdbc implements ItemDao{
@@ -43,7 +45,21 @@ public class ItemDaoJdbc implements ItemDao{
     }
 
     @Override
-    public List<ItemModel> getAll() {
-        return null;
+    public List<ItemModel> getAll(int saveId) {
+        try (Connection conn = dataSource.getConnection()) {
+            String sql = "SELECT id, item_tile_name, width_position, height_position FROM item WHERE save_id = ?";
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setInt(1, saveId);
+            ResultSet rs = st.executeQuery();
+            List<ItemModel> result = new ArrayList<>();
+            while (rs.next()) { // while result set pointer is positioned before or on last row read authors
+                ItemModel itemModel = new ItemModel(rs.getString(2),rs.getInt(3), rs.getInt(4));
+                itemModel.setId(rs.getInt(1));
+                result.add(itemModel);
+            }
+            return result;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error while reading all authors", e);
+        }
     }
 }
