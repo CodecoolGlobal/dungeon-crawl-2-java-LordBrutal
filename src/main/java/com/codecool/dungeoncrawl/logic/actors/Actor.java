@@ -5,6 +5,8 @@ import com.codecool.dungeoncrawl.logic.actors.enemys.Cyclops;
 import com.codecool.dungeoncrawl.logic.actors.enemys.Enemy;
 import com.codecool.dungeoncrawl.logic.create_map_components.BreakableWalls;
 
+import java.util.Objects;
+
 
 public abstract class Actor implements Drawable {
     private Cell cell;
@@ -20,27 +22,28 @@ public abstract class Actor implements Drawable {
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
         Actor actor = cell.getActor();
-        if (this.health <= 0) {
-            return;
-        }
-        if(nextCell.getType().equals(CellType.FLOOR) && nextCell.getActor() == null){
-            cell.setActor(null);
-            nextCell.setActor(this);
-            cell = nextCell;
-        }
-        else if (nextCell.getActor() != null) {
-            if (!(this.getTileName() != cell.getMap().getPlayer().getTileName() && nextCell.getActor().getTileName() != cell.getMap().getPlayer().getTileName())){
-                attack(nextCell.getActor());
+        if (nextCell != null) {
+            if (this.health <= 0) {
+                return;
             }
-        }else if (nextCell.getType().equals(CellType.BREAKABLEWALL)) {
-            if ((actor instanceof Player && ((Player)actor).getHasPickAxe()) || actor instanceof Cyclops) {
-                nextCell.setType(CellType.FLOOR);
-                nextCell.getMap().removeBreakableWall(nextCell);
+            if (nextCell.getType().equals(CellType.FLOOR) && nextCell.getActor() == null) {
+                cell.setActor(null);
+                nextCell.setActor(this);
+                cell = nextCell;
+            } else if (nextCell.getActor() != null) {
+                if (!(!Objects.equals(this.getTileName(), cell.getMap().getPlayer().getTileName()) && !Objects.equals(nextCell.getActor().getTileName(), cell.getMap().getPlayer().getTileName()))) {
+                    attack(nextCell.getActor());
+                }
+            } else if (nextCell.getType().equals(CellType.BREAKABLEWALL)) {
+                if ((actor instanceof Player && ((Player) actor).getHasPickAxe()) || actor instanceof Cyclops) {
+                    nextCell.setType(CellType.FLOOR);
+                    nextCell.getMap().removeBreakableWall(nextCell);
+                }
+            } else if (nextCell.getType().equals(CellType.DOOR) && cell.getMap().getPlayer().getHasKey()) {
+                cell.setActor(null);
+                nextCell.setActor(this);
+                cell = nextCell;
             }
-        } else if (nextCell.getType().equals(CellType.DOOR) && cell.getMap().getPlayer().getHasKey()) {
-            cell.setActor(null);
-            nextCell.setActor(this);
-            cell = nextCell;
         }
     }
     public void attack(Actor target) {

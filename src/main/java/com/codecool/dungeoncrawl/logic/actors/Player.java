@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Player extends Actor {
     private String name;
 
-    private ObservableList<String> inventory = FXCollections.observableArrayList();
+    private final ObservableList<String> inventory = FXCollections.observableArrayList();
     private int defense = 0;
     private boolean hasPickAxe = false;
     private boolean hasKey = false;
@@ -90,10 +90,10 @@ public class Player extends Actor {
     }
 
     public String getItems() {
-        String itemList = "";
+        StringBuilder itemList = new StringBuilder();
         for(String item : inventory) {
-            itemList += item + " ";
+            itemList.append(item).append(" ");
         }
-        return itemList.strip();
+        return itemList.toString().strip();
     }
 }

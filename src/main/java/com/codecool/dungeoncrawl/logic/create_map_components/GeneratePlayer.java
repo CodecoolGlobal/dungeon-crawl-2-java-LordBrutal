@@ -12,5 +12,6 @@ public class GeneratePlayer {
             gameMap.setPlayer(new Player(gameMap.getCell(player.getX(), player.getY())));
             gameMap.getPlayer().setAttack(player.getAttack());
 
+
     }
 }
