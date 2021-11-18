@@ -1,5 +1,7 @@
-package com.codecool.dungeoncrawl.logic;
+package com.codecool.dungeoncrawl.logic.actor_test;
 
+import com.codecool.dungeoncrawl.logic.CellType;
+import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.logic.items.PickAxe;
 import com.codecool.dungeoncrawl.logic.items.Sword;
@@ -22,6 +24,13 @@ public class PlayerTest {
     public void createPlayerInstance() {
         gameMap = new GameMap(5, 5, 1, CellType.FLOOR);
         player = new Player(gameMap.getCell(2, 2));
+    }
+
+    @Test
+    void testPlayerHealthAtCreation() {
+        int expected = 10;
+        int actual = player.getHealth();
+        assertEquals(expected, actual);
     }
 
     @Test
