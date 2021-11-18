@@ -56,7 +56,7 @@ public class PlayerTest {
         player.addToInventory(new Sword(gameMap.getCell(2,2)));
         player.addToInventory(new PickAxe(gameMap.getCell(2,2)));
 
-        String expected = "Sword PickAxe";
+        String expected = "Sword,PickAxe";
         String actual = player.getItems();
 
         assertEquals(expected, actual);
