@@ -11,6 +11,7 @@ public class GeneratePlayer {
         Player player = new Player(gameMap.getCell(playerModel.getX(), playerModel.getY()));
         gameMap.setPlayer(player);
         player.setAttack(playerModel.getAttack());
+        player.setHealth(playerModel.getHp());
         player.setDefense(playerModel.getDef());
         String items = playerModel.getItems();
         player.setTileName(playerModel.getPlayerName());
